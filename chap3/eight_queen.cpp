@@ -93,6 +93,7 @@ void show() //图形化输出
 	int p, q;
 	int b[N][N] = { {0} };
 
+	int mq = 0;
 	printf("第%d个解为: ", t++);
 	for (i = 0; i < N; i++) {
 		b[i][a[i]] = 1;

@@ -1,0 +1,1 @@
+njie.d: ../njie.cpp

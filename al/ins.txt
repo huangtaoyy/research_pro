@@ -1,0 +1,17 @@
+/*
+		1017709:adc	[eax], al	
+		1017711:add	[eax], al	
+		1017713:pop	edx	
+		1017714:pop	ecx	
+		1017715:pop	ebx	
+		1017716:ret
+		-----------------------------
+		1683009:add	eax, 0x01A20000	
+		1683014:add	edi, edi	
+		1683016:add	[eax], eax	
+		1683018:mov	dl, 0x02	
+		1683020:add	eax, 0xFFFF0000	
+		1683025:add	[ebx], ecx		//加数放入ecx，被加数地址放入ebx
+		1683027:ret
+
+	*/

@@ -1,0 +1,16 @@
+
+**** Build of configuration Debug for project try_debug ****
+
+make all 
+Building file: ../twoSum.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"twoSum.d" -MT"twoSum.d" -o "twoSum.o" "../twoSum.cpp"
+Finished building: ../twoSum.cpp
+ 
+Building target: try_debug
+Invoking: Cross G++ Linker
+g++  -o "try_debug"  ./main.o ./njie.o ./twoSum.o   
+Finished building target: try_debug
+ 
+
+**** Build Finished ****

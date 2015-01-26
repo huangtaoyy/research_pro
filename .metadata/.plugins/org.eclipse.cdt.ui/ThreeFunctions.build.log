@@ -1,0 +1,16 @@
+
+**** Build of configuration Debug for project ThreeFunctions ****
+
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: ThreeFunctions
+Invoking: Cross G++ Linker
+g++  -o "ThreeFunctions"  ./append_func.o ./disasm_util.o ./elf_util.o ./main.o   -lelf -ldisasm
+Finished building target: ThreeFunctions
+ 
+
+**** Build Finished ****

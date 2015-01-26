@@ -1,0 +1,14 @@
+/*
+ * elf_util.h
+ *
+ *  Created on: 2013-12-19
+ *      Author: huangtao
+ */
+
+#ifndef ELF_UTIL_H_
+#define ELF_UTIL_H_
+
+
+
+
+#endif /* ELF_UTIL_H_ */

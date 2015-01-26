@@ -1,0 +1,258 @@
+/*
+ * test_disasm.cpp
+ *
+ *  Created on: 2013-12-19
+ *      Author: huangtao
+ */
+#include <libdis.h>
+#include <libelf.h>
+#include <gelf.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sysexits.h>
+#include <err.h>
+#include <string.h>
+#include <unistd.h>
+#include <vector>
+#include <stack>
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+struct TrieNode {
+	x86_insn_t* insn;
+	string insn_str;
+
+	vector<TrieNode*> record;
+
+	stack<string> gadget;
+};
+
+class Trie {
+private:
+	void print_stack(stack<string> &s);
+public:
+	Trie() {
+		root = new TrieNode;
+		root->insn_str = "ret";
+		root->gadget.push("ret");
+	}
+
+	TrieNode* root;
+	void output(TrieNode* parent);
+};
+
+void Trie::output(TrieNode* parent) {
+//	cout << parent->record.size() << endl;
+	if (parent->record.empty()) {
+		print_stack(parent->gadget);
+		return;
+	}
+
+	vector<TrieNode*>::iterator it = parent->record.begin();
+	for (; it != parent->record.end(); it++) {
+		output(*it);
+	}
+}
+
+void Trie::print_stack(stack<string> &s) {
+	fstream fout("output.gad");
+	if (!fout.is_open()) {
+		cout << "output.gad open fail" << endl;
+	}
+	while (!s.empty()) {
+		string x = s.top();
+		fout << x << endl;
+		cout << x << endl;
+		s.pop();
+	}
+	cout << endl;
+	fout.close();
+}
+
+bool decode_as_insn(unsigned char* &seg, size_t step, size_t pos,
+		Elf32_Addr &address, x86_insn_t* &insn, char* line) {
+	if (pos - step < 0) {
+		return false;
+	}
+
+	x86_init(opt_none, NULL, NULL);
+
+	size_t size = 0;
+	size = x86_disasm(seg, pos, address, pos - step, insn);
+	if (size == step) {
+		x86_format_insn(insn, line, MAX_INSN_STRING, native_syntax);
+		if (x86_insn_is_valid(insn)) {
+			x86_cleanup();
+			return true;
+		}
+//		printf("insn: %s\n", line);
+	}
+
+	x86_cleanup();
+
+	return false;
+}
+
+bool insn_boring(x86_insn_t* &insn) {
+	if (insn->type == insn_invalid || insn->type == insn_jmp
+			|| insn->type == insn_jcc || insn->type == insn_call
+			|| insn->type == insn_callcc || insn->type == insn_return
+			|| insn->type == insn_halt) {
+		return true;
+	}
+	return false;
+}
+
+void build_from(unsigned char* &seg, size_t pos, TrieNode* &parent,
+		Elf32_Addr &address, int &depth) {
+	if (pos <= 0) {
+		return;
+	}
+
+//	if (depth++ > 7) {
+//		return;
+//	}
+
+	for (int step = 1; step <= MAX_INSN_SIZE; step++) {
+		x86_insn_t* insn = new x86_insn_t;
+		char line[MAX_INSN_STRING];
+
+		if (decode_as_insn(seg, step, pos, address, insn, line)) {
+
+			if (!insn_boring(insn)) {
+				// a new node consisted of insn
+				TrieNode* node = new TrieNode;
+				node->insn = insn;
+				node->insn_str = line;
+				node->gadget = parent->gadget;
+				node->gadget.push(line);
+
+				// ensure insn be a child of parent
+				parent->record.push_back(node);
+
+				build_from(seg, pos - step, node, address, depth);
+			}
+		}
+	}
+}
+
+void galileo_text_seg(Trie* &tree, unsigned char* seg, size_t seg_len,
+		Elf32_Addr &address) {
+	size_t pos = 0;
+
+	for (pos = 0; pos < seg_len; pos++) {
+//		char temp = seg[pos];
+//		printf("%02hhx,", temp);
+//		unsigned char buf[3];
+//		snprintf((char*)buf, sizeof(buf), "%02hhx", seg[pos]);
+//		buf[sizeof(buf) - 1] = '\0';
+//		if (strcmp((const char*)buf, "c3") == 0) {
+//			build_from(seg, pos, tree->root, address);
+//			printf("true,");
+//		}
+		char temp = seg[pos];
+		int depth = 0;
+		if (temp == '\xc3') {
+			printf("true,\n");
+			build_from(seg, pos, tree->root, address, depth);
+		}
+	}
+	printf("\n");
+}
+
+size_t get_section_ndx(Elf* e, const char* scn_name) {
+	size_t shdr_str_ndx = 0;
+	if (elf_getshdrstrndx(e, &shdr_str_ndx) != 0) {
+		errx(EX_SOFTWARE, "elf_getshstrndx() failed:%s.", elf_errmsg(-1));
+	}
+
+	char* name;
+	size_t shnum;
+	if (elf_getshdrnum(e, &shnum) != 0) {
+		errx(EX_SOFTWARE, "elf_getshnum() failed:%s.", elf_errmsg(-1));
+	}
+
+	Elf_Scn* scn;
+	GElf_Shdr shdr;
+	size_t i;
+	for (i = 0; i < shnum; i++) {
+		scn = elf_getscn(e, i);
+
+		if (gelf_getshdr(scn, &shdr) != &shdr) {
+			errx(EX_SOFTWARE, "getshdr() failed: %s.", elf_errmsg(-1));
+		}
+
+		if ((name = elf_strptr(e, shdr_str_ndx, shdr.sh_name)) == NULL) {
+			errx(EX_SOFTWARE, "elf_strptr() failed: %s.", elf_errmsg(-1));
+		}
+
+		if (strcmp((const char*) name, scn_name) == 0) {
+			size_t elf_ndx = elf_ndxscn(scn);
+			return elf_ndx;
+		}
+	}
+
+	return 0;
+}
+
+unsigned char* get_section_data(Elf* e, const char* scn_name, size_t& size,
+		Elf32_Addr &address) {
+	size_t scn_ndx = get_section_ndx(e, scn_name);
+	Elf_Scn* scn = elf_getscn(e, scn_ndx);
+	Elf_Data* data;
+
+	if ((data = elf_getdata(scn, NULL)) == NULL) {
+		errx(EX_SOFTWARE, "elf_getdata() failed:%s.", elf_errmsg(-1));
+	}
+
+	Elf32_Shdr* shdr = elf32_getshdr(scn);
+	unsigned char* d_buff = (unsigned char*) malloc(
+			sizeof(unsigned char) * shdr->sh_size);
+
+	memcpy(d_buff, data->d_buf, shdr->sh_size);
+	size = shdr->sh_size;
+	address = shdr->sh_addr;
+
+	return d_buff;
+}
+
+size_t write_file(const char* file, unsigned char* content, size_t size) {
+	int fd = open(file, O_CREAT | O_RDWR, S_IRWXU | S_IXOTH | S_IXGRP);
+//	printf("fd = %d, size = %d\n", fd, size);
+	size_t act = write(fd, content, size);
+	printf("write _ file over!\n");
+	close(fd);
+	return act;
+}
+
+int main(int argc, char** argv) {
+//	if (argc != 2) {
+//		printf("usage: %s file\n", argv[0]);
+//	}
+
+	Elf* e;
+	int fd;
+
+//	fd = open(argv[1], O_RDWR);
+	fd = open("./Debug/a", O_RDWR);
+	elf_version(EV_CURRENT);
+	e = elf_begin(fd, ELF_C_RDWR, NULL);
+
+	unsigned char* d_buff = NULL;
+	size_t size = 0;
+	Elf32_Addr address = 0;
+	d_buff = get_section_data(e, ".text", size, address);
+//	printf("...%s, %d\n", d_buff, size);
+
+	elf_end(e);
+	close(fd);
+
+//	write_file("output", d_buff, size);
+	Trie* tree = new Trie;
+	galileo_text_seg(tree, d_buff, size, address);
+	tree->output(tree->root);
+
+	return 0;
+}

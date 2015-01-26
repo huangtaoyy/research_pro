@@ -1,0 +1,29 @@
+/*
+ * eight_queen.cpp
+ *
+ *  Created on: 2015-1-21
+ *      Author: huangtao
+ */
+bool a[8];
+bool b[15];
+bool c[15];
+
+int x[8];
+
+bool try_by_col(int j) {
+	for (int i = 0; i < 8; i ++) {
+		if (a[i] && b[i + j] && c[j - i + 7]) {
+			x[j] = i;
+			a[i] = b[i + j] = c[j - i + 7] = false;
+
+			if (j == 7 || try_by_col(j + 1)) {
+				return true;
+			}else {
+				a[i] = b[i + j] = c[j - i + 7] = false;
+			}
+		}
+	}
+}
+
+
+

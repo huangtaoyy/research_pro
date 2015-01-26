@@ -1,0 +1,15 @@
+what,kind,bundleId,bundleVersion,description,time
+closed,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1421841639803
+stopped,bundle,org.eclipse.linuxtools.valgrind.massif,0.9.0.201202152032,"org.eclipse.linuxtools.valgrind.massif",1421841640334
+stopped,bundle,org.eclipse.birt.chart.device.svg,3.7.2.v20120213,"org.eclipse.birt.chart.device.svg",1421841640335
+stopped,bundle,org.eclipse.birt.chart.device.extension,3.7.2.v20120213,"org.eclipse.birt.chart.device.extension",1421841640335
+stopped,bundle,org.eclipse.birt.chart.device.swt,3.7.2.v20120213,"org.eclipse.birt.chart.device.swt",1421841640336
+stopped,bundle,org.eclipse.birt.chart.engine.extension,3.7.2.v20120213,"org.eclipse.birt.chart.engine.extension",1421841640336
+stopped,bundle,org.eclipse.linuxtools.gcov.core,4.1.1.201202152032,"org.eclipse.linuxtools.gcov.core",1421841640337
+stopped,bundle,org.eclipse.linuxtools.gprof,4.0.0.201202152032,"org.eclipse.linuxtools.gprof",1421841640338
+stopped,bundle,org.eclipse.linuxtools.dataviewers.charts,4.1.0.201202152032,"org.eclipse.linuxtools.dataviewers.charts",1421841640338
+stopped,bundle,org.eclipse.birt.chart.ui,3.7.2.v20120213,"org.eclipse.birt.chart.ui",1421841640339
+stopped,bundle,org.eclipse.linuxtools.systemtap.ui.dashboardextension,0.3.0.201202152032,"org.eclipse.linuxtools.systemtap.ui.dashboardextension",1421841640340
+stopped,bundle,org.eclipse.linuxtools.systemtap.ui.dashboard,0.3.0.201202152032,"org.eclipse.linuxtools.systemtap.ui.dashboard",1421841640341
+stopped,bundle,org.eclipse.linuxtools.systemtap.ui.graphicalrun,0.3.0.201202152032,"org.eclipse.linuxtools.systemtap.ui.graphicalrun",1421841640341
+stopped,bundle,org.eclipse.linuxtools.systemtap.ui.ide,0.3.0.201202152032,"org.eclipse.linuxtools.systemtap.ui.ide",1421841640381

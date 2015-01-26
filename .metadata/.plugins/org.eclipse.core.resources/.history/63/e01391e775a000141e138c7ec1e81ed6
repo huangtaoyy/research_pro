@@ -1,0 +1,34 @@
+/*
+ * main.cpp
+ *
+ *  Created on: 2013-12-21
+ *      Author: huangtao
+ */
+#include <stdio.h>
+#include <iostream>
+#include <stack>
+using namespace std;
+
+void int_to_char(unsigned int addr, unsigned char* addr_arr, int size) {
+	for (int i = 0; i < size; i ++) {
+		addr_arr[i] = addr >> (i * 8);
+	}
+}
+
+void print_stack(stack<int> s) {
+	while(!s.empty()) {
+		cout << s.pop() << endl;
+	}
+}
+
+int main() {
+	unsigned int a = 0x2bd5;
+	unsigned char b[4];
+	int_to_char(a, b, 4);
+
+	printf("a= %x, \t", a);
+	for (int i = 0; i < 4; i ++) {
+		printf("b[%d] = %x, ", i, b[i]);
+	}
+}
+

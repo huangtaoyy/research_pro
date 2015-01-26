@@ -1,0 +1,64 @@
+/*
+ * eight_queen.cpp
+ *
+ *  Created on: 2015-1-21
+ *      Author: huangtao
+ */
+
+#include <iostream>
+using namespace std;
+
+bool a[8];  //a[i]表示第i行是否可以放皇后
+bool b[15]; //b[k]表示“从左下往右上”('/')的第k个对角线是否可以放皇后
+bool c[15]; //c[k]表示“从左上往右下”('\')的第k个对角线是否可以放皇后
+//与棋盘第i行、第j列的格子所对应的行和对角线为：a[i],b[i+j],c[j-i+7]
+
+int x[8];//x[j]表示第j列上皇后的位置（所在的行）。
+
+bool try_by_col(int j) {
+	for (int i = 0; i < 8; i++) {
+		if (a[i] && b[i + j] && c[j - i + 7]) {
+			x[j] = i;
+			a[i] = b[i + j] = c[j - i + 7] = false;
+
+			if (j == 7 || try_by_col(j + 1)) {
+				return true;
+			} else {
+				a[i] = b[i + j] = c[j - i + 7] = false;
+			}
+		}
+	}
+	return false;
+}
+
+int eight_queen() {
+	for (int i = 0; i < 8; i++) {
+		a[i] = true;
+	}
+	for (int k = 0; k < 15; k++) {
+		b[k] = true;
+		c[k] = true;
+	}
+
+	if (try_by_col(0)) {
+		for (int j = 0; j < 8; j++) {
+			for (int i = 0; i < x[j]; i++) {
+				cout << "|_";
+			}
+			cout << "|Q|";
+			for (int i = x[j] + 1; i < 8; i++) {
+				cout << "_|";
+			}
+			cout << endl;
+		}
+	}
+	cout << endl;
+	return 0;
+}
+
+int main(int argc, char** argv) {
+	eight_queen();
+
+	return 0;
+}
+

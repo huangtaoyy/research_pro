@@ -1,0 +1,11 @@
+
+**** Build of configuration Debug for project PrepareRegion ****
+
+make all 
+Building target: PrepareRegion
+Invoking: Cross G++ Linker
+g++  -o "PrepareRegion"  ./append_func.o ./elf_util.o ./main.o   -lelf
+Finished building target: PrepareRegion
+ 
+
+**** Build Finished ****

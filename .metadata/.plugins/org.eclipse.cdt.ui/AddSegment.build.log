@@ -1,0 +1,19 @@
+
+**** Build of configuration Debug for project AddSegment ****
+
+make all 
+Building file: ../addsegment.c
+Invoking: Cross GCC Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"addsegment.d" -MT"addsegment.d" -o "addsegment.o" "../addsegment.c"
+../addsegment.c: 在函数‘add_segment’中:
+../addsegment.c:35:2: 警告： 传递‘strncmp’的第 1 个参数给指针时，目标与指针符号不一致 [-Wpointer-sign]
+/usr/include/string.h:146:12: 附注： 需要类型‘const char *’，但实参的类型为‘unsigned char *’
+Finished building: ../addsegment.c
+ 
+Building target: AddSegment
+Invoking: Cross GCC Linker
+gcc  -o "AddSegment"  ./addsegment.o ./elf_util.o   -lelf
+Finished building target: AddSegment
+ 
+
+**** Build Finished ****

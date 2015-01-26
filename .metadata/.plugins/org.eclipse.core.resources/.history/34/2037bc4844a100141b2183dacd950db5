@@ -1,0 +1,86 @@
+/*
+ * main.cpp
+ *
+ *  Created on: 2015-1-21
+ *      Author: huangtao
+ */
+
+#include <iostream>
+
+using namespace std;
+
+double Hermit_Iterative(int n, double x) {
+	if (n == 0) {
+		return 1;
+	} else if (n == 1) {
+		return 2 * x;
+	} else {
+		double res1 = 1, res2 = 2 * x;
+		double result = 0;
+		for (int i = 2; i <= n; i ++) {
+			result = res2 * 2 * x -  res1 * 2 * (i - 1);
+			res1 = res2;
+			res2 = result;
+		}
+		return result;
+	}
+}
+
+double Hermit_Recursive(int n, double x) {
+	if (n == 0) {
+		return 1;
+	} else if (n == 1) {
+		return 2 * x;
+	} else {
+		return 2 * x * Hermit_Recursive(n - 1, x) - 2 * (n - 1) * Hermit_Recursive(n - 2, x);
+	}
+}
+
+void test_hermit() {
+	const int n = 3;
+	double x = 3.14;
+	cout << "Hermit(): " << endl;
+	cout << Hermit_Iterative(n, x) << endl << Hermit_Recursive(n, x) << endl;
+}
+
+int Ack(int m, int n) {
+	if (m == 0) {
+		return n + 1;
+	} else if (n == 0) {
+		return Ack(m - 1, 1);
+	} else {
+		return Ack(m - 1, Ack(m, n - 1));
+	}
+}
+
+void test_ack() {
+	int m = 3, n = 3;
+	cout << "Ack(): " << endl;
+	cout << Ack(m, n) << endl;
+}
+
+void print_arr(int *a, int n) {
+	for (int i = 0; i < n; i ++) {
+		cout << a[i] << ", ";
+	}
+	cout << endl;
+}
+
+void swap_mn(int* a, int m, int n) {
+
+	for (int i = 0; i < m; i++) {
+		int temp = a[0];
+		for (int j = 1; j < m + n - 1; j++) {
+			a[j] = a[j + 1];
+		}
+		a[m + n - 1] = temp;
+	}
+}
+
+int main(int argc, char** argv) {
+//	test_hermit();
+	test_ack();
+
+	return 0;
+}
+

@@ -193,7 +193,7 @@ void galileo_text_seg(Trie* &tree, unsigned char* seg, size_t seg_len,
 			build_from(seg, pos, tree->root, address, depth);
 		}
 	}
-	printf("\n");
+	cout << endl;
 }
 
 size_t get_section_ndx(Elf* e, const char* scn_name) {
@@ -270,7 +270,6 @@ int main(int argc, char** argv) {
 
 //	fd = open(argv[1], O_RDWR);
 	fd = open("./Debug/libc.so", O_RDWR);
-	elf_version(EV_CURRENT);
 	e = elf_begin(fd, ELF_C_RDWR, NULL);
 
 	unsigned char* d_buff = NULL;

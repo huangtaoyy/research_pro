@@ -1,0 +1,19 @@
+/*
+ * turing_operation.h
+ *
+ *  Created on: 2015-3-24
+ *      Author: huangtao
+ */
+
+#ifndef TURING_OPERATION_H_
+#define TURING_OPERATION_H_
+
+#include <vector>
+#include "trie_tree.h"
+
+//Load & Store
+void load_constant_to_register(vector<LGadget*>& l_gadgets);
+
+void
+
+#endif /* TURING_OPERATION_H_ */

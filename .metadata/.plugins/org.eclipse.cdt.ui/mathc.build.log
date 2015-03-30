@@ -1,0 +1,32 @@
+
+**** Build of configuration Debug for project mathc ****
+
+make all 
+Building file: ../mathc.cc
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"mathc.d" -MT"mathc.d" -o "mathc.o" "../mathc.cc"
+../mathc.cc: 在函数‘std::string getAddress(std::string)’中:
+../mathc.cc:22:6: 警告： 未使用的变量‘index’ [-Wunused-variable]
+../mathc.cc: 在函数‘std::string reverseString(std::string)’中:
+../mathc.cc:99:6: 警告： 未使用的变量‘index’ [-Wunused-variable]
+../mathc.cc: 在函数‘char* DecToHex(long int, char*)’中:
+../mathc.cc:134:30: 警告： 格式 ‘%X’ expects argument of type ‘unsigned int’, but argument 3 has type ‘long int’ [-Wformat]
+../mathc.cc: 在函数‘std::string getStr(long int, int, int)’中:
+../mathc.cc:220:6: 警告： 未使用的变量‘offset’ [-Wunused-variable]
+../mathc.cc: 在函数‘int main()’中:
+../mathc.cc:241:15: 警告： 未使用的变量‘heapaddr’ [-Wunused-variable]
+../mathc.cc: 在函数‘int f(int)’中:
+../mathc.cc:263:72: 警告： 格式字符串嵌有‘\0’ [-Wformat-contains-nul]
+../mathc.cc:263:72: 警告： 格式字符串嵌有‘\0’ [-Wformat-contains-nul]
+../mathc.cc:252:6: 警告： 未使用的变量‘x’ [-Wunused-variable]
+../mathc.cc:260:6: 警告： 未使用的变量‘addr’ [-Wunused-variable]
+../mathc.cc:261:6: 警告： 未使用的变量‘b’ [-Wunused-variable]
+Finished building: ../mathc.cc
+ 
+Building target: mathc
+Invoking: GCC C++ Linker
+g++  -o "mathc"  ./mathc.o   
+Finished building target: mathc
+ 
+
+**** Build Finished ****

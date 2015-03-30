@@ -1,0 +1,55 @@
+/*
+ * inst_dependency.h
+ *
+ *  Created on: 2015-3-16
+ *      Author: huangtao
+ */
+
+#ifndef INST_DEPENDENCY_H_
+#define INST_DEPENDENCY_H_
+
+#include <libdis.h>
+#include <vector>
+#include <string>
+#include "trie_tree.h"
+
+using namespace std;
+
+enum dep_inst_type {
+	i_refuse = 0, i_accept = 1
+};
+
+class Inst {
+private:
+	void accept_inst();
+public:
+	TrieNode* node;
+	dep_inst_type is_accept;
+
+	Inst(TrieNode* node):node(node) {
+		accept_inst();
+	}
+
+	dep_inst_type is_inst_accept() {
+		return is_accept;
+	}
+};
+
+class LGadget {
+public:
+	vector<Inst*> insts;
+
+	//registers altered before ins_i
+	vector<x86_reg_t> pre_write(int i);
+
+	//registers altered after ins_i
+	vector<x86_reg_t> post_write(int i);
+
+	//no conflict
+	bool is_inst_valid(int i);
+
+	//A LGadget is G-Valid if there exists at least one I-Valid instruction in it
+	bool is_gadget_valid();
+};
+
+#endif /* INST_DEPENDENCY_H_ */

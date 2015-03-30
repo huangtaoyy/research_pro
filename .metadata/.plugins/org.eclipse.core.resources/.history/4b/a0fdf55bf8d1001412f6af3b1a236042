@@ -1,0 +1,524 @@
+/*
+ * trie_tree.cpp
+ *
+ *  Created on: 2015-3-16
+ *      Author: huangtao
+ */
+
+#include <algorithm>
+#include "trie_tree.h"
+
+string Trie::make_plural(int count, const string &word, const string &ending) {
+	return (count == 1) ? word : word + ending;
+}
+
+void Trie::output() {
+	fout.open("output.gad", ios::out);
+	if (!fout.is_open()) {
+		cout << "output.gad open failed!" << endl;
+		return;
+	}
+
+	output(root);
+
+//	fout.seekg(0, ios::beg);
+//	fout << "there are " << count_c3 << make_plural(count_c3, " ret", "s") << endl;
+//
+//	fout.seekg(0, ios::beg);
+//	fout << "there are " << count_gadget << make_plural(count_gadget, " gadget", "s") << endl;
+
+	cout << "there are " << count_c3 << make_plural(count_c3, " ret", "'s")
+			<< endl;
+	cout << "there are " << count_gadget
+			<< make_plural(count_gadget, " gadget", "s") << endl;
+	fout.close();
+}
+
+void Trie::output(TrieNode* parent) {
+	if (parent->record.empty()) {
+		print_stack(parent->gadget);
+		return;
+	}
+
+	vector<TrieNode*>::iterator it = parent->record.begin();
+	for (; it != parent->record.end(); it++) {
+		output((TrieNode*) *it);
+	}
+}
+
+void Trie::print_stack(stack<TrieNode*> &s) {
+	if (s.size() > 8 || s.size() < 3) {
+		return;
+	}
+
+	//another 3<=length<=7 gadget, increment gadget number
+	count_gadget++;
+	LGadget* l_g = new LGadget;
+
+	while (!s.empty()) {
+		TrieNode* x = s.top();
+		fout << x->insn_str << endl;
+//		cout << x->insn_str << endl;
+//		new Inst(x);
+		l_g->insts.push_back(new Inst(x));
+		s.pop();
+	}
+
+	//put LGadget into a vector
+	l_gadgets.push_back(l_g);
+
+//	cout << endl;
+	fout << endl;
+
+}
+
+dep_inst_type Inst::is_inst_accept(x86_op_t* op) {
+	if (op != NULL) {
+		switch (op->type) {
+		case op_immediate:
+			return i_refuse;
+			break;
+		case op_register:
+			if (strcmp(op->data.reg.name, "ebp") == 0
+					|| strcmp(op->data.reg.name, "esp") == 0) {
+				return i_refuse;
+			}
+			break;
+		case op_unused:
+		case op_unknown:
+			return i_refuse;
+			break;
+		case op_relative_near:
+		case op_relative_far:
+		case op_absolute:
+		case op_offset:
+		case op_expression:
+
+		default:
+			break;
+		}
+	}
+
+	return i_accept;
+}
+
+//instruction is accept is not stack pointer, base pointer, segment and immediate
+dep_inst_type Inst::is_inst_accept() {
+
+	if (is_inst_accept(x86_operand_1st(node->insn)) == i_refuse) {
+		return i_refuse;
+	}
+
+	if (is_inst_accept(x86_operand_2nd(node->insn)) == i_refuse) {
+		return i_refuse;
+	}
+
+	if (is_inst_accept(x86_operand_3rd(node->insn)) == i_refuse) {
+		return i_refuse;
+	}
+
+	return i_accept;
+}
+
+void set_reg_name(vector<x86_reg_t> &v, vector<string> &v_s) {
+	for (vector<x86_reg_t>::iterator it = v.begin(); it != v.end(); ++it) {
+		v_s.push_back((*it).name);
+	}
+}
+
+bool has_same_reg(vector<string>& v_s, string str) {
+	//eax
+	if (strcasecmp(str.c_str(), "eax") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "al");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ah");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ax");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "ax") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "al");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ah");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "eax");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "ah") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "al");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ax");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "eax");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "al") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ah");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ax");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "eax");
+		if (r != v_s.end()) {
+			return true;
+		}
+	}
+
+	//ebx
+	if (strcasecmp(str.c_str(), "ebx") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "bl");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "bh");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "bx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "bx") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "bl");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "bh");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ebx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "bh") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "bl");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "bx");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ebx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "bl") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "bh");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "bx");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ebx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	}
+
+	//ecx
+	if (strcasecmp(str.c_str(), "ecx") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "cl");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ch");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "cx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "cx") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "cl");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ch");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ecx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "ch") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "cl");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "cx");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ecx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "cl") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ch");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "cx");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "ecx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	}
+
+	//edx
+	if (strcasecmp(str.c_str(), "edx") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "dl");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "dh");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "dx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "dx") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "dl");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "dh");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "edx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "dh") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "dl");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "dx");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "edx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	} else if (strcasecmp(str.c_str(), "dl") == 0) {
+		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), str);
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "dh");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "dx");
+		if (r != v_s.end()) {
+			return true;
+		}
+		r = find(v_s.begin(), v_s.end(), "edx");
+		if (r != v_s.end()) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+//if two vector has a same object
+bool has_same_reg(vector<x86_reg_t> &v1, vector<x86_reg_t> &v) {
+	vector<string> v1_s, v_s;
+	set_reg_name(v1, v1_s);
+	set_reg_name(v, v_s);
+
+	for (vector<string>::iterator i1 = v1_s.begin(); i1 != v1_s.end(); ++i1) {
+		if (has_same_reg(v_s, *i1)) {
+			return true;
+		}
+//		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), *i1);
+//		if (r != v_s.end()) {
+////			cout << "same!" << endl;
+//			return true;
+//		}
+	}
+	return false;
+}
+
+//registers altered before ins_i
+void LGadget::pre_write(vector<x86_reg_t> & result, size_t i) {
+	if (i > insts.size() || i < 1) {
+		return;
+	}
+	size_t count = 0;
+
+	vector<Inst*>::iterator it = insts.begin();
+	for (; it != insts.end() && count < i; ++it) {
+		TrieNode *node = (*it)->node;
+//		for (vector<x86_reg_t>::iterator v_i = node->write_set.begin();
+//				v_i != node->write_set.end(); ++v_i) {
+//			result.push_back(*v_i);
+//		}
+		result.insert(result.end(), node->write_set.begin(),
+				node->write_set.end());
+		count++;
+	}
+}
+
+//registers altered after ins_i
+void LGadget::post_write(vector<x86_reg_t> & result, size_t i) {
+	if (i >= insts.size()) {
+		return;
+	}
+	vector<Inst*>::iterator it = insts.begin() + i + 1;
+	for (; it != insts.end(); ++it) {
+		TrieNode *node = (*it)->node;
+//		for (vector<x86_reg_t>::iterator v_i = node->write_set.begin();
+//				v_i != node->write_set.end(); ++v_i) {
+//			result.push_back(*v_i);
+//		}
+		result.insert(result.end(), node->write_set.begin(),
+				node->write_set.end());
+	}
+}
+
+//no conflict
+bool LGadget::is_inst_valid(size_t i) {
+	Inst* inst = insts.at(i);
+
+	if (inst->is_inst_accept() == i_refuse) {
+		return false;
+	}
+
+	//readset
+	vector<x86_reg_t> read_set = inst->node->read_set;
+
+	//writeset
+	vector<x86_reg_t> write_set = inst->node->write_set;
+
+	//prewrite
+	vector<x86_reg_t> pre_write_v;
+	pre_write(pre_write_v, i);
+
+	if (has_same_reg(read_set, pre_write_v)) {
+		return false;
+	}
+	if (has_same_reg(write_set, pre_write_v)) {
+		return false;
+	}
+
+	//postwrite
+	vector<x86_reg_t> post_write_v;
+	post_write(post_write_v, i);
+
+	if (has_same_reg(write_set, post_write_v)) {
+		return false;
+	}
+
+	inst->inst_valid = true;
+	return true;
+}
+
+//A LGadget is G-Valid if there exists at least one I-Valid instruction in it
+bool LGadget::is_gadget_valid() {
+	int count_valid = 0;
+	for (size_t i = 0; i != insts.size(); ++i) {
+		if (is_inst_valid(i) && insts[i]->node->insn->type != insn_return) {
+			count_valid++;
+		}
+	}
+	if (count_valid > 0) {
+		return true;
+	}
+
+	cout << "exit is_gadget_valid!" << endl;
+	return false;
+}

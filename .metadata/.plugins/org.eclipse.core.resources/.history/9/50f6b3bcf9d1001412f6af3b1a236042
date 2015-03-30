@@ -1,0 +1,106 @@
+/*
+ * trie_tree.h
+ *
+ *  Created on: 2015-3-16
+ *      Author: huangtao
+ */
+
+#ifndef TRIE_TREE_H_
+#define TRIE_TREE_H_
+
+#include <libdis.h>
+#include <string.h>
+#include <vector>
+#include <stack>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+struct TrieNode {
+	x86_insn_t* insn;
+	string insn_str;
+	string reg_str;
+
+	vector<TrieNode*> record;
+
+	stack<TrieNode*> gadget;
+
+	vector<x86_reg_t> read_set;
+	vector<x86_reg_t> write_set;
+
+	TrieNode() {
+	}
+
+	TrieNode(string str) {
+		insn_str = str;
+	}
+};
+
+const string RET_STR("ret");
+
+class Inst;
+class LGadget;
+class Trie {
+private:
+	void print_stack(stack<TrieNode*> &s);
+	void output(TrieNode* parent);
+	inline string make_plural(int count, const string &word, const string &ending);
+
+public:
+	Trie() {
+		root = new TrieNode;
+		root->insn_str = RET_STR;
+		root->gadget.push(new TrieNode("ret"));
+		count_c3 = 0;
+		count_gadget = 0;
+	}
+
+	TrieNode* root;
+	fstream fout;
+
+	int count_c3;
+	int count_gadget;
+
+	//vector to store LGadget
+	vector<LGadget*> l_gadgets;
+
+	void output();
+};
+
+
+enum dep_inst_type {
+	i_refuse = 0, i_accept = 1
+};
+
+class Inst {
+private:
+	dep_inst_type is_inst_accept(x86_op_t* op);
+public:
+	TrieNode* node;
+	bool inst_valid;
+
+	Inst(TrieNode* node, bool inst_v = false):node(node), inst_valid(inst_v) {
+	}
+
+	dep_inst_type is_inst_accept();
+};
+
+class LGadget {
+public:
+	vector<Inst*> insts;
+
+	//registers altered before ins_i
+	void pre_write(vector<x86_reg_t> & v, size_t i);
+
+	//registers altered after ins_i
+	void post_write(vector<x86_reg_t>& v,size_t i);
+
+	//no conflict
+	bool is_inst_valid(size_t i);
+
+	//A LGadget is G-Valid if there exists at least one I-Valid instruction in it
+	bool is_gadget_valid();
+};
+
+#endif /* TRIE_TREE_H_ */

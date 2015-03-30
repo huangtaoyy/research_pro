@@ -1,0 +1,56 @@
+/*
+ * inst_dependency.h
+ *
+ *  Created on: 2015-3-16
+ *      Author: huangtao
+ */
+
+#ifndef INST_DEPENDENCY_H_
+#define INST_DEPENDENCY_H_
+
+#include <vector>
+#include "trie_tree.h"
+
+using namespace std;
+
+string get_operand_type_str(enum x86_op_type type) {
+	static string types[] = { "op_unused", "op_register", "op_immediate",
+			"op_relative_near", "op_relative_far", "op_absolute",
+			"op_expression", "op_offset", "op_unknown" };
+	int element_size = sizeof(types) / sizeof(types[0]);
+
+	if (type >= element_size) {
+		return types[element_size - 1];
+	} else {
+		return types[type];
+	}
+
+}
+
+enum dep_inst_type {
+	i_refuse = 0, i_accept = 1
+};
+
+class Inst {
+public:
+	TrieNode* node;
+	Inst(TrieNode* node):node(node) {
+	}
+
+	bool inst_accept();
+	bool inst_valid();
+};
+
+class LGadget {
+public:
+	vector<Inst*> insts;
+
+
+	//registers altered before ins_i
+	vector<x86_reg_t> pre_write(int i);
+
+	//registers altered after ins_i
+	vector<x86_reg_t> post_write(int i);
+};
+
+#endif /* INST_DEPENDENCY_H_ */

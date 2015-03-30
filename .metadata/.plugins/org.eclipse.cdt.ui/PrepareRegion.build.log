@@ -2,6 +2,11 @@
 **** Build of configuration Debug for project PrepareRegion ****
 
 make all 
+Building file: ../append_func.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"append_func.d" -MT"append_func.d" -o "append_func.o" "../append_func.cpp"
+Finished building: ../append_func.cpp
+ 
 Building target: PrepareRegion
 Invoking: Cross G++ Linker
 g++  -o "PrepareRegion"  ./append_func.o ./elf_util.o ./main.o   -lelf

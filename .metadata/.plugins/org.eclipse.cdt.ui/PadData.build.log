@@ -2,15 +2,6 @@
 **** Build of configuration Debug for project PadData ****
 
 make all 
-Building file: ../src/pad_data.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/pad_data.d" -MT"src/pad_data.d" -o "src/pad_data.o" "../src/pad_data.cpp"
-Finished building: ../src/pad_data.cpp
- 
-Building target: PadData
-Invoking: GCC C++ Linker
-g++  -o "PadData"  ./src/elf_util.o ./src/main.o ./src/pad_data.o   -lelf
-Finished building target: PadData
- 
+make: 没有什么可以做的为 `all'。
 
 **** Build Finished ****

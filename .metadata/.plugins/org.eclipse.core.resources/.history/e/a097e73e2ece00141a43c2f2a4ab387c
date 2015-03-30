@@ -1,0 +1,76 @@
+/*
+ * inst_dependency.cpp
+ *
+ *  Created on: 2015-3-19
+ *      Author: huangtao
+ */
+#include "inst_dependency.h"
+
+void Inst::accept_inst() {
+	x86_oplist_t* op_list = node->insn->operands;
+	is_accept = i_accept;
+
+	while (op_list != NULL) {
+		x86_op_t* op = &op_list->op;
+
+		switch (op->type) {
+		case op_immediate:
+			is_accept = i_refuse;
+			break;
+		case op_register:
+			if (strcmp(op->data.reg.name, "ebp") == 0
+					|| strcmp(op->data.reg.name, "esp") == 0) {
+				is_accept = i_refuse;
+			}
+			break;
+		case op_relative_near:
+		case op_relative_far:
+		case op_absolute:
+		case op_offset:
+		case op_expression:
+		case op_unused:
+		case op_unknown:
+			break;
+		default:
+			break;
+		}
+	}
+	op_list = op_list->next;
+}
+
+//registers altered before ins_i
+vector<x86_reg_t> LGadget::pre_write(int i) {
+	vector<x86_reg_t> result;
+	int count = 1;
+
+	vector<Inst*>::iterator it = insts.begin();
+	for (; it != insts.end() && count <= i; ++it) {
+		TrieNode *node = (*it)->node;
+		for (vector<x86_reg_t>::iterator v_i = node->write_set.begin();
+				v_i != node->write_set.end(); ++v_i) {
+			result.push_back(*v_i);
+		}
+		count++;
+	}
+
+	return result;
+}
+
+//registers altered after ins_i
+vector<x86_reg_t> LGadget::post_write(int i) {
+	vector<x86_reg_t> result;
+
+	return result;
+}
+
+//no conflict
+bool LGadget::is_inst_valid(int i) {
+
+	return false;
+}
+
+//A LGadget is G-Valid if there exists at least one I-Valid instruction in it
+bool LGadget::is_gadget_valid() {
+
+	return false;
+}

@@ -1,0 +1,1 @@
+mathc.d: ../mathc.cc

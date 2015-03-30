@@ -1,0 +1,21 @@
+/*
+ * turing_operation.cpp
+ *
+ *  Created on: 2015-3-24
+ *      Author: huangtao
+ */
+#include "turing_operation.h"
+
+
+void Load_Store::load_constant_to_register(vector<LGadget*>& l_gadgets) {
+
+}
+
+void Load_Store::load_from_memory(vector<LGadget*>& l_gadgets) {
+
+}
+
+void Load_Store::store_to_memory(vector<LGadget*>& l_gadgets) {
+
+}
+

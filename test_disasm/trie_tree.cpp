@@ -22,8 +22,8 @@ string Trie::make_plural(int count, const string &word, const string &ending) {
 	return (count == 1) ? word : word + ending;
 }
 
-void Trie::output() {
-	fout.open("output.gad", ios::out);
+void Trie::output(string & filename) {
+	fout.open(filename.c_str(), ios::out);
 	if (!fout.is_open()) {
 		cout << "output.gad open failed!" << endl;
 		return;
@@ -88,10 +88,23 @@ dep_inst_type Inst::is_inst_accept(x86_op_t* op) {
 		case op_immediate:
 			return i_refuse;
 		case op_register:
-			if (strcmp(op->data.reg.name, "ebp") == 0
+			if (strcasecmp(op->data.reg.name, "ebp") == 0
 					|| strcmp(op->data.reg.name, "esp") == 0) {
 				return i_refuse;
 			}
+//			cout << op->data.reg.name << " : " << op->data.reg.type << endl;
+			break;
+		case op_expression:
+			if (strcasecmp(op->data.expression.base.name, "ebp") == 0
+					|| strcasecmp(op->data.expression.base.name, "esp") == 0
+					|| strcasecmp(op->data.expression.index.name, "ebp") == 0
+					|| strcasecmp(op->data.expression.index.name, "esp") == 0) {
+				return i_refuse;
+			}
+//			cout << op->data.expression.base.name << " : "
+//					<< op->data.expression.base.type << endl;
+//			cout << op->data.expression.index.name << " : "
+//					<< op->data.expression.index.type << endl;
 			break;
 		case op_unused:
 		case op_unknown:
@@ -100,7 +113,6 @@ dep_inst_type Inst::is_inst_accept(x86_op_t* op) {
 		case op_relative_far:
 		case op_absolute:
 		case op_offset:
-		case op_expression:
 
 		default:
 			break;
@@ -135,9 +147,8 @@ void set_reg_name(vector<x86_reg_t> &v, vector<string> &v_s) {
 }
 
 bool has_same_reg1(vector<string>& v_s, string str) {
-	static string regs[4][4] = { { "eax", "ax", "ah", "al" },
-			{ "ebx", "bx", "bh", "bl" },
-			{ "ecx", "cx", "ch", "cl" },
+	static string regs[4][4] = { { "eax", "ax", "ah", "al" }, { "ebx", "bx",
+			"bh", "bl" }, { "ecx", "cx", "ch", "cl" },
 			{ "edx", "dx", "dh", "dl" }, };
 
 	for (int i = 0; i < 4; i++) {
@@ -252,6 +263,7 @@ bool LGadget::is_inst_valid(size_t i) {
 	}
 
 	inst->inst_valid = true;
+
 	return true;
 }
 
@@ -275,8 +287,19 @@ bool LGadget::is_gadget_valid() {
 void LGadget::print_insts() {
 	cout << endl;
 	vector<Inst*>::iterator it = insts.begin();
-	for (; it != insts.end(); ++ it) {
-		cout << (*it)->node->insn_str << endl;
+	for (; it != insts.end(); ++it) {
+		cout << (*it)->node->insn_str
+				<< ((*it)->inst_valid ? ":\tvalid" : ":\tnon") << endl;
 	}
 	cout << endl;
+}
+
+void LGadget::write_insts(fstream& fout) {
+	fout << endl;
+	vector<Inst*>::iterator it = insts.begin();
+	for (; it != insts.end(); ++it) {
+		fout << (*it)->node->insn_str
+				<< ((*it)->inst_valid ? ":\tvalid" : ":\tnon") << endl;
+	}
+	fout << endl;
 }

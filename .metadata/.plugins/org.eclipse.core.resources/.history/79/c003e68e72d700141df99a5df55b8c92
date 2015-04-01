@@ -1,0 +1,133 @@
+/*
+ * turing_operation.cpp
+ *
+ *  Created on: 2015-3-24
+ *      Author: huangtao
+ */
+#include "turing_operation.h"
+
+//reg=eax by default
+bool Load_Store::load_constant_to_register(vector<LGadget*>& l_gadgets,
+		LGadget* &l_g) {
+
+	string reg = "eax";
+	return load_constant_to_register(l_gadgets, reg, l_g);
+}
+
+bool Load_Store::load_constant_to_register(vector<LGadget*>& l_gadgets,
+		string &reg, LGadget* &l_g) {
+
+	vector<LGadget*>::iterator it = l_gadgets.begin();
+	for (; it != l_gadgets.end(); ++it) {
+		if ((*it)->is_gadget_valid()) {
+
+			vector<Inst*>::iterator vi = (*it)->insts.begin();
+			for (; vi != (*it)->insts.end(); ++vi) {
+				if ((*vi)->inst_valid && (*vi)->node->insn->type == insn_pop) {
+
+					vector<x86_reg_t>::iterator wi =
+							(*vi)->node->write_set.begin();
+					for (; wi != (*vi)->node->write_set.end(); ++wi) {
+						if (strcasecmp(reg.c_str(), (*wi).name) == 0) {
+							//find a l_gadget
+							l_g = (*it);
+							return true;
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	return false;
+}
+
+void Load_Store::val_dbug(x86_op_t* op) {
+	if (op != NULL && op->type == op_expression
+			&& strcasecmp("ecx", op->data.expression.base.name) == 0) {
+//int a = 0;
+//int b = 2;
+	}
+}
+
+int count_valid_inst(LGadget* &l_g) {
+	int count = 0;
+	vector<Inst*>::iterator vi = l_g->insts.begin();
+	for (; vi != l_g->insts.end(); ++vi) {
+		if ((*vi)->inst_valid) {
+			count++;
+		}
+	}
+	return count;
+}
+
+//eax <- [ecx + 0x20]
+bool Load_Store::load_from_memory(vector<LGadget*>& l_gadgets, string& src_reg,
+		string& des_reg, LGadget* &l_g) {
+	fstream fout;
+	fout.open("find.gad", ios::out);
+
+	vector<LGadget*>::iterator it = l_gadgets.begin();
+	int least_valid = count_valid_inst(*it);
+
+	for (; it != l_gadgets.end(); ++it) {
+		if ((*it)->is_gadget_valid()) {
+
+			vector<Inst*>::iterator vi = (*it)->insts.begin();
+			for (; vi != (*it)->insts.end(); ++vi) {
+
+				//判断指令是正确的，当指令类型为mov
+				if ((*vi)->inst_valid && (*vi)->node->insn->type == insn_mov
+						&& strcasecmp((*vi)->node->insn->mnemonic, "lea") != 0
+						&& strcasecmp((*vi)->node->insn->mnemonic, "lds")
+								!= 0) {
+
+					vector<x86_reg_t>::iterator wi =
+							(*vi)->node->write_set.begin();
+					for (; wi != (*vi)->node->write_set.end(); ++wi) {
+						if (strcasecmp(des_reg.c_str(), (*wi).name) == 0) {
+
+							//source register
+							x86_op_t* op = x86_operand_2nd((*vi)->node->insn);
+
+							//指令格式为eax <- [ecx + 0x20]，expression，不需要index寄存器
+							if (op != NULL && op->type == op_expression
+									&& strcasecmp(op->data.expression.base.name,
+											src_reg.c_str()) == 0
+									&& strcasecmp(
+											op->data.expression.index.name, "")
+											== 0) {
+//								val_dbug(op);
+								//find a l_gadget
+								int count = count_valid_inst((*it));
+								(*it)->write_insts(fout);
+								cout << count << endl;
+								if (count < least_valid) {
+									l_g = (*it);
+									least_valid = count;
+								}
+
+//								return true;
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	l_g->print_insts();
+	fout.close();
+
+	return false;
+}
+
+bool Load_Store::store_to_memory(vector<LGadget*>& l_gadgets) {
+
+	return false;
+}

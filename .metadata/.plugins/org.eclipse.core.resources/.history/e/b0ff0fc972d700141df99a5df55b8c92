@@ -1,0 +1,33 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CPP_SRCS += \
+../inst_dependency.cpp \
+../process.cpp \
+../trie_tree.cpp \
+../turing_operation.cpp 
+
+OBJS += \
+./inst_dependency.o \
+./process.o \
+./trie_tree.o \
+./turing_operation.o 
+
+CPP_DEPS += \
+./inst_dependency.d \
+./process.d \
+./trie_tree.d \
+./turing_operation.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+%.o: ../%.cpp
+	@echo 'Building file: $<'
+	@echo 'Invoking: Cross G++ Compiler'
+	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

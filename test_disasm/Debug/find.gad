@@ -1,0 +1,50 @@
+
+00023899 89 07 	mov	[edi]	eax		:mnemonic,mov	:	write_set,edi,,	:	read_set,eax,:	valid
+0002389B 31 C0 	xor	eax	eax		:mnemonic,xor	:	write_set,eax,	:	read_set,eax,eax,:	valid
+0002389D 8B 5C 24 2C 	mov	ebx	[esp+0x2C]		:mnemonic,mov	:	write_set,ebx,	:	read_set,esp,,:	non
+000238A1 8B 74 24 30 	mov	esi	[esp+0x30]		:mnemonic,mov	:	write_set,esi,	:	read_set,esp,,:	non
+000238A5 8B 7C 24 34 	mov	edi	[esp+0x34]		:mnemonic,mov	:	write_set,edi,	:	read_set,esp,,:	non
+000238A9 8B 6C 24 38 	mov	ebp	[esp+0x38]		:mnemonic,mov	:	write_set,ebp,	:	read_set,esp,,:	non
+000238AD 83 C4 3C 	add	esp	0x3C		:mnemonic,add	:	write_set,esp,	:	read_set,esp,:	non
+ret:	non
+
+
+00081111 00 8B 44 24 1C 89 	add	[ebx-0x76E3DBBC]	cl		:mnemonic,add	:	write_set,ebx,,	:	read_set,ebx,,cl,:	non
+00081117 2E 89 07 	mov	cs:[edi]	eax		:mnemonic,mov	:	write_set,edi,,	:	read_set,eax,:	valid
+0008111A 8B 5C 24 2C 	mov	ebx	[esp+0x2C]		:mnemonic,mov	:	write_set,ebx,	:	read_set,esp,,:	non
+0008111E 8B 74 24 30 	mov	esi	[esp+0x30]		:mnemonic,mov	:	write_set,esi,	:	read_set,esp,,:	non
+00081122 8B 7C 24 34 	mov	edi	[esp+0x34]		:mnemonic,mov	:	write_set,edi,	:	read_set,esp,,:	non
+00081126 8B 6C 24 38 	mov	ebp	[esp+0x38]		:mnemonic,mov	:	write_set,ebp,	:	read_set,esp,,:	non
+0008112A 83 C4 3C 	add	esp	0x3C		:mnemonic,add	:	write_set,esp,	:	read_set,esp,:	non
+ret:	non
+
+
+000CEA45 89 07 	mov	[edi]	eax		:mnemonic,mov	:	write_set,edi,,	:	read_set,eax,:	valid
+000CEA47 8B 5C 24 2C 	mov	ebx	[esp+0x2C]		:mnemonic,mov	:	write_set,ebx,	:	read_set,esp,,:	non
+000CEA4B 8B 74 24 30 	mov	esi	[esp+0x30]		:mnemonic,mov	:	write_set,esi,	:	read_set,esp,,:	non
+000CEA4F 8B 7C 24 34 	mov	edi	[esp+0x34]		:mnemonic,mov	:	write_set,edi,	:	read_set,esp,,:	non
+000CEA53 8B 6C 24 38 	mov	ebp	[esp+0x38]		:mnemonic,mov	:	write_set,ebp,	:	read_set,esp,,:	non
+000CEA57 83 C4 3C 	add	esp	0x3C		:mnemonic,add	:	write_set,esp,	:	read_set,esp,:	non
+ret:	non
+
+
+0011CA9B 89 07 	mov	[edi]	eax		:mnemonic,mov	:	write_set,edi,,	:	read_set,eax,:	valid
+0011CA9D 83 C4 7C 	add	esp	0x7C		:mnemonic,add	:	write_set,esp,	:	read_set,esp,:	non
+0011CAA0 89 F8 	mov	eax	edi		:mnemonic,mov	:	write_set,eax,	:	read_set,edi,:	valid
+0011CAA2 5B 	pop	ebx		:mnemonic,pop	:	write_set,ebx,	:	read_set,:	valid
+0011CAA3 5E 	pop	esi		:mnemonic,pop	:	write_set,esi,	:	read_set,:	valid
+0011CAA4 5F 	pop	edi		:mnemonic,pop	:	write_set,edi,	:	read_set,:	valid
+0011CAA5 5D 	pop	ebp		:mnemonic,pop	:	write_set,ebp,	:	read_set,:	non
+ret:	non
+
+<<<<<<<<<<<<<<<<<<<<<
+
+00081111 00 8B 44 24 1C 89 	add	[ebx-0x76E3DBBC]	cl		:mnemonic,add	:	write_set,ebx,,	:	read_set,ebx,,cl,:	non
+00081117 2E 89 07 	mov	cs:[edi]	eax		:mnemonic,mov	:	write_set,edi,,	:	read_set,eax,:	valid
+0008111A 8B 5C 24 2C 	mov	ebx	[esp+0x2C]		:mnemonic,mov	:	write_set,ebx,	:	read_set,esp,,:	non
+0008111E 8B 74 24 30 	mov	esi	[esp+0x30]		:mnemonic,mov	:	write_set,esi,	:	read_set,esp,,:	non
+00081122 8B 7C 24 34 	mov	edi	[esp+0x34]		:mnemonic,mov	:	write_set,edi,	:	read_set,esp,,:	non
+00081126 8B 6C 24 38 	mov	ebp	[esp+0x38]		:mnemonic,mov	:	write_set,ebp,	:	read_set,esp,,:	non
+0008112A 83 C4 3C 	add	esp	0x3C		:mnemonic,add	:	write_set,esp,	:	read_set,esp,:	non
+ret:	non
+

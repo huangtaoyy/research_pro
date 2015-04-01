@@ -1,0 +1,20 @@
+
+there are 7501 ret's
+there are 18104 gadgets
+18104 gadgets get !
+edi : 131073
+ : 0
+operand count : 2
+optype: 6
+edi : 131073
+ : 0
+operand count : 2
+optype: 6
+edi : 131073
+ : 0
+operand count : 2
+optype: 6
+edi : 131073
+ : 0
+operand count : 2
+optype: 6

@@ -26,7 +26,6 @@
 
 using namespace std;
 
-
 size_t get_section_ndx(Elf* e, const char* scn_name) {
 	size_t shdr_str_ndx = 0;
 	if (elf_getshdrstrndx(e, &shdr_str_ndx) != 0) {
@@ -91,7 +90,6 @@ size_t write_file(const char* file, unsigned char* content, size_t size) {
 	return act;
 }
 
-
 string get_operand_type_str(enum x86_op_type type) {
 	static string types[] = { "op_unused", "op_register", "op_immediate",
 			"op_relative_near", "op_relative_far", "op_absolute",
@@ -128,7 +126,7 @@ bool decode_as_insn(unsigned char* &seg, size_t step, size_t pos,
 	size_t size = 0;
 	size = x86_disasm(seg, pos, address, pos - step, insn);
 	if (size == step) {
-		x86_format_insn(insn, line, MAX_INSN_STRING, intel_syntax);
+		x86_format_insn(insn, line, MAX_INSN_STRING, native_syntax);
 		replace_insn_blank(line);
 
 		if (x86_insn_is_valid(insn)) {
@@ -219,6 +217,12 @@ void print_operands(TrieNode* node) {
 	}
 }
 
+void int_to_char(unsigned int addr, char* addr_arr, int size) {
+	for (int i = 0; i < size; i++) {
+		addr_arr[i] = addr >> (i * 8);
+	}
+}
+
 void build_from(unsigned char* &seg, size_t pos, TrieNode* &parent,
 		Elf32_Addr &address, int &depth) {
 	if (pos <= 0) {
@@ -239,6 +243,9 @@ void build_from(unsigned char* &seg, size_t pos, TrieNode* &parent,
 				// a new node consisted of insn
 				TrieNode* node = new TrieNode;
 				node->insn = insn;
+//				char temp[32];
+//				int_to_char(insn->offset, temp, 32);
+//				node->insn_str = temp;
 				node->insn_str = line;
 				set_operand_reg(node);
 				print_operands(node);
@@ -283,7 +290,8 @@ void galileo_text_seg(Trie* &tree, unsigned char* seg, size_t seg_len,
 void write_gadgets_to(fstream& fout, LGadget* l_g) {
 	vector<Inst*>::iterator l_it = l_g->insts.begin();
 	for (; l_it != l_g->insts.end(); ++l_it) {
-		fout << (*l_it)->node->insn_str << ((*l_it)->inst_valid ? ":\tvalid" : ":\tnon") << endl;
+		fout << (*l_it)->node->insn_str
+				<< ((*l_it)->inst_valid ? ":\tvalid" : ":\tnon") << endl;
 	}
 	fout << endl;
 }
@@ -293,7 +301,7 @@ void validate_gadgets(vector<LGadget*> &l_gadgets) {
 	fout.open("valid_output.gad", ios::out);
 	if (!fout.is_open()) {
 		cout << "file open error!" << endl;
-		return ;
+		return;
 	}
 
 	vector<LGadget*>::iterator it = l_gadgets.begin();
@@ -304,7 +312,6 @@ void validate_gadgets(vector<LGadget*> &l_gadgets) {
 	}
 	fout.close();
 }
-
 
 int main(int argc, char** argv) {
 	if (argc != 2) {
@@ -331,7 +338,8 @@ int main(int argc, char** argv) {
 	Trie* tree = new Trie;
 	galileo_text_seg(tree, d_buff, size, address);
 
-	tree->output();
+	string filename = "output.gad";
+	tree->output(filename);
 	cout << tree->l_gadgets.size() << " gadgets get !" << endl;
 
 	validate_gadgets(tree->l_gadgets);
@@ -339,11 +347,22 @@ int main(int argc, char** argv) {
 	//turing complete lgadget
 	Load_Store load_store;
 	LGadget* l_g = new LGadget;
-	string reg = "eax";
 
 	//load constant to register
-	load_store.load_constant_to_register(tree->l_gadgets, reg, l_g);
-	l_g->print_insts();
+//	string reg = "eax";
+//	load_store.load_constant_to_register(tree->l_gadgets, reg, l_g);
+//	l_g->print_insts();
 
+	//load_from_memory
+//	string src_reg = "ecx", des_reg = "eax";
+//	load_store.load_from_memory(tree->l_gadgets, src_reg, des_reg, l_g);
+
+	//store_to_memory
+	string src_reg = "eax", des_reg = "edi";
+	load_store.store_to_memory(tree->l_gadgets, src_reg, des_reg, l_g);
+
+	delete l_g;
+	delete tree;
+	delete d_buff;
 	return 0;
 }

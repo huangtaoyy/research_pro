@@ -36,53 +36,33 @@
 <part id="3"/>
 <part id="4"/>
 <part id="5"/>
-<part id="6"/>
-<part id="7"/>
-<part id="8"/>
-<part id="9"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="process.cpp" partName="process.cpp" path="/home/huangtao/workspace/test_disasm/process.cpp" title="process.cpp" tooltip="test_disasm/process.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/process.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="8155" selectionTopPixel="5458"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="trie_tree.h" partName="trie_tree.h" path="/home/huangtao/workspace/test_disasm/trie_tree.h" title="trie_tree.h" tooltip="test_disasm/trie_tree.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/trie_tree.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1542" selectionTopPixel="1258"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="libdis.h" partName="libdis.h" title="libdis.h" tooltip="/usr/local/include/libdis.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" path="/usr/local/include/libdis.h" project="test_disasm"/>
-<editorState selectionHorizontalPixel="0" selectionLength="11" selectionOffset="13748" selectionTopPixel="4930"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.cpp" partName="main.cpp" path="/home/huangtao/workspace/Test_Func/main.cpp" title="main.cpp" tooltip="Test_Func/main.cpp" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Test_Func/main.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="890" selectionTopPixel="661"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="8491" selectionTopPixel="5668"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="turing_operation.h" partName="turing_operation.h" path="/home/huangtao/workspace/test_disasm/turing_operation.h" title="turing_operation.h" tooltip="test_disasm/turing_operation.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/turing_operation.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="225" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="704" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="turing_operation.cpp" partName="turing_operation.cpp" path="/home/huangtao/workspace/test_disasm/turing_operation.cpp" title="turing_operation.cpp" tooltip="test_disasm/turing_operation.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/turing_operation.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="17" selectionOffset="705" selectionTopPixel="187"/>
+<editorState selectionHorizontalPixel="168" selectionLength="0" selectionOffset="4716" selectionTopPixel="2854"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="trie_tree.cpp" partName="trie_tree.cpp" path="/home/huangtao/workspace/test_disasm/trie_tree.cpp" title="trie_tree.cpp" tooltip="test_disasm/trie_tree.cpp" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="trie_tree.cpp" partName="trie_tree.cpp" path="/home/huangtao/workspace/test_disasm/trie_tree.cpp" title="trie_tree.cpp" tooltip="test_disasm/trie_tree.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/trie_tree.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6237" selectionTopPixel="4319"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2120" selectionTopPixel="2035"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="inst_dependency.cpp" partName="inst_dependency.cpp" path="/home/huangtao/workspace/test_disasm/inst_dependency.cpp" title="inst_dependency.cpp" tooltip="test_disasm/inst_dependency.cpp" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/inst_dependency.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="1558"/>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="trie_tree.h" partName="trie_tree.h" path="/home/huangtao/workspace/test_disasm/trie_tree.h" title="trie_tree.h" tooltip="test_disasm/trie_tree.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/trie_tree.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="10" selectionOffset="1063" selectionTopPixel="1130"/>
 </editor>
-<editor id="org.eclipse.ui.DefaultTextEditor" name="libc.dump" partName="libc.dump" path="/home/huangtao/workspace/test_disasm/libc.dump" title="libc.dump" tooltip="test_disasm/libc.dump" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/libc.dump"/>
-<editorState selectionHorizontalPixel="0" selectionLength="12" selectionOffset="1719" selectionTopPixel="558"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.binaryEditor" name="libc.so" partName="libc.so" path="/home/huangtao/workspace/test_disasm/libc.so" title="libc.so" tooltip="test_disasm/libc.so" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/libc.so"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="10835" selectionTopPixel="1064"/>
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="libdis.h" partName="libdis.h" title="libdis.h" tooltip="/usr/local/include/libdis.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" path="/usr/local/include/libdis.h" project="test_disasm"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="10865" selectionTopPixel="3660"/>
 </editor>
 </editors>
 <views>
@@ -118,12 +98,16 @@
 <viewState/>
 </view>
 <view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
-<viewState CommonNavigator.LINKING_ENABLED="1" org.eclipse.cdt.ui.cview.groupincludes="false" org.eclipse.cdt.ui.cview.groupmacros="false" org.eclipse.cdt.ui.editor.CUChildren="true" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
+<viewState CommonNavigator.LINKING_ENABLED="0" org.eclipse.cdt.ui.cview.groupincludes="false" org.eclipse.cdt.ui.cview.groupmacros="false" org.eclipse.cdt.ui.editor.CUChildren="true" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
 </view>
 <view id="org.eclipse.ui.views.PropertySheet" partName="Properties"/>
 <view id="org.eclipse.cdt.make.ui.views.MakeView" partName="Make Target"/>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
+<expanded>
+<category IMemento.internal.id="Warnings"/>
+<category IMemento.internal.id="Errors"/>
+</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="120" org.eclipse.ui.ide.markerType="306" org.eclipse.ui.ide.pathField="160" org.eclipse.ui.ide.resourceField="120" org.eclipse.ui.ide.severityAndDescriptionField="400"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -234,7 +218,7 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.16788857" ratioLeft="229" ratioRight="1135" relationship="2" relative="topLeft"/>
-<info folder="true" part="bottom" ratio="0.7032258" ratioLeft="545" ratioRight="230" relationship="4" relative="org.eclipse.ui.editorss">
+<info folder="true" part="bottom" ratio="0.78322583" ratioLeft="607" ratioRight="168" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
@@ -376,170 +360,160 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/process.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/trie_tree.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/inst_dependency.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/trie_tree.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/trie_tree.cpp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/turing_operation.cpp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/turing_operation.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/test_disasm/libc.dump"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.binaryEditor" path="/test_disasm/libc.so"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/turing_operation.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/turing_operation.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.binaryEditor" path="/test_disasm/libc.so"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/test_disasm/libc.dump"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/trie_tree.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/trie_tree.cpp"/>
+<editor factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usr/local/include/libdis.h" project="test_disasm"/>
 </editors>
-<item historyLabel="trie_tree.cpp" index="1">
-<position info="not_deleted" x="6175" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="1013" y="47"/>
 </item>
-<item historyLabel="trie_tree.cpp" index="1">
-<position info="not_deleted" x="6222" y="0"/>
+<item historyLabel="turing_operation.h" index="2">
+<position info="not_deleted" x="704" y="0"/>
 </item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="8030" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="3112" y="112"/>
 </item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="8192" y="0"/>
+<item historyLabel="turing_operation.h" index="2">
+<position info="not_deleted" x="704" y="0"/>
 </item>
-<item historyLabel="trie_tree.cpp" index="1">
-<position info="not_deleted" x="6237" y="0"/>
-</item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="8192" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="3241" y="0"/>
 </item>
 <item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="4796" y="14"/>
+<position info="not_deleted" x="8470" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="3241" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="3838" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4815" y="0"/>
 </item>
 <item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="6723" y="16"/>
+<position info="not_deleted" x="8470" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="3129" y="15"/>
 </item>
 <item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="4796" y="14"/>
+<position info="not_deleted" x="8491" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="3643" y="0"/>
+</item>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="12538" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4219" y="0"/>
+</item>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="7517" y="11"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4215" y="0"/>
+</item>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="7603" y="0"/>
 </item>
 <item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="5833" y="0"/>
+<position info="not_deleted" x="8491" y="0"/>
 </item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="4943" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4215" y="0"/>
 </item>
-<item historyLabel="trie_tree.cpp" index="1">
-<position info="not_deleted" x="6097" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4892" y="0"/>
 </item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="4943" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4264" y="0"/>
 </item>
-<item historyLabel="inst_dependency.cpp" index="2">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="5445" y="6"/>
 </item>
-<item historyLabel="trie_tree.h" index="3">
-<position info="not_deleted" x="1577" y="4"/>
+<item historyLabel="turing_operation.h" index="2">
+<position info="not_deleted" x="704" y="0"/>
 </item>
-<item historyLabel="trie_tree.cpp" index="4">
-<position info="not_deleted" x="6097" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4263" y="0"/>
 </item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="8072" y="0"/>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="12640" y="10"/>
 </item>
-<item historyLabel="trie_tree.cpp" index="4">
-<position info="not_deleted" x="6097" y="0"/>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="12626" y="0"/>
 </item>
-<item historyLabel="trie_tree.h" index="3">
-<position info="not_deleted" x="1577" y="4"/>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="6868" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="5">
-<position info="not_deleted" x="301" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="2822" y="0"/>
 </item>
-<item historyLabel="turing_operation.h" index="6">
-<position info="not_deleted" x="222" y="10"/>
+<item historyLabel="trie_tree.cpp" index="3">
+<position info="not_deleted" x="6933" y="0"/>
 </item>
-<item historyLabel="libc.dump" index="7">
-<position info="not_deleted" x="903" y="0"/>
+<item historyLabel="trie_tree.cpp" index="3">
+<position info="not_deleted" x="2936" y="20"/>
 </item>
-<item historyLabel="libc.so" index="8">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="trie_tree.cpp" index="3">
+<position info="not_deleted" x="1788" y="20"/>
 </item>
-<item historyLabel="libc.dump" index="7">
-<position info="not_deleted" x="903" y="0"/>
+<item historyLabel="trie_tree.cpp" index="3">
+<position info="not_deleted" x="2120" y="0"/>
 </item>
-<item historyLabel="libc.so" index="8">
-<position info="not_deleted" x="1674" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="2822" y="0"/>
 </item>
-<item historyLabel="libc.dump" index="7">
-<position info="not_deleted" x="903" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="2497" y="0"/>
 </item>
-<item historyLabel="libc.so" index="8">
-<position info="not_deleted" x="1674" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4095" y="0"/>
 </item>
-<item historyLabel="libc.dump" index="7">
-<position info="not_deleted" x="3906" y="0"/>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="28118" y="15"/>
 </item>
-<item historyLabel="libc.so" index="8">
-<position info="not_deleted" x="1674" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4095" y="0"/>
 </item>
-<item historyLabel="trie_tree.h" index="3">
-<position info="not_deleted" x="1575" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="5118" y="0"/>
 </item>
-<item historyLabel="trie_tree.cpp" index="4">
-<position info="not_deleted" x="6097" y="0"/>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="27898" y="17"/>
 </item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="8072" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4719" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="9">
-<position info="not_deleted" x="532" y="0"/>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="27898" y="17"/>
 </item>
-<item historyLabel="turing_operation.h" index="10">
-<position info="not_deleted" x="222" y="10"/>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="27952" y="0"/>
 </item>
-<item historyLabel="libc.so" index="11">
-<position info="not_deleted" x="1674" y="0"/>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="26856" y="6"/>
 </item>
-<item historyLabel="libc.dump" index="12">
-<position info="not_deleted" x="1719" y="12"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4669" y="0"/>
 </item>
-<item historyLabel="libc.so" index="11">
-<position info="not_deleted" x="10835" y="0"/>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="26856" y="6"/>
 </item>
-<item historyLabel="libc.dump" index="12">
-<position info="not_deleted" x="1719" y="12"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4687" y="0"/>
 </item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="196" y="0"/>
+<item historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="27898" y="17"/>
 </item>
-<item historyLabel="trie_tree.h" index="13">
-<position info="not_deleted" x="1575" y="0"/>
+<item historyLabel="turing_operation.cpp" index="1">
+<position info="not_deleted" x="4716" y="0"/>
 </item>
-<item historyLabel="trie_tree.h" index="13">
-<position info="not_deleted" x="872" y="9"/>
-</item>
-<item historyLabel="trie_tree.h" index="13">
-<position info="not_deleted" x="865" y="0"/>
-</item>
-<item historyLabel="trie_tree.h" index="13">
-<position info="not_deleted" x="1192" y="7"/>
-</item>
-<item historyLabel="trie_tree.cpp" index="14">
-<position info="not_deleted" x="6097" y="0"/>
-</item>
-<item historyLabel="trie_tree.cpp" index="14">
-<position info="not_deleted" x="5720" y="15"/>
-</item>
-<item historyLabel="turing_operation.cpp" index="9">
-<position info="not_deleted" x="705" y="17"/>
-</item>
-<item historyLabel="turing_operation.h" index="10">
-<position info="not_deleted" x="225" y="0"/>
-</item>
-<item historyLabel="trie_tree.cpp" index="14">
-<position info="not_deleted" x="6160" y="0"/>
-</item>
-<item historyLabel="trie_tree.h" index="13">
-<position info="not_deleted" x="1542" y="0"/>
-</item>
-<item active="true" historyLabel="trie_tree.cpp" index="14">
-<position info="not_deleted" x="6160" y="0"/>
+<item active="true" historyLabel="libdis.h" index="4">
+<position info="not_deleted" x="26856" y="6"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -559,6 +533,21 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="libdis.h" tooltip="/usr/local/include/libdis.h">
+<persistable path="/usr/local/include/libdis.h" project="test_disasm"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.cpp" tooltip="Test_Func/main.cpp">
+<persistable path="/Test_Func/main.cpp"/>
+</file>
+<file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stringfwd.h" tooltip="/usr/include/c++/4.6/bits/stringfwd.h">
+<persistable path="/usr/include/c++/4.6/bits/stringfwd.h" project="test_disasm"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="trie_tree.h" tooltip="test_disasm/trie_tree.h">
+<persistable path="/test_disasm/trie_tree.h"/>
+</file>
+<file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stl_vector.h" tooltip="/usr/include/c++/4.6/bits/stl_vector.h">
+<persistable path="/usr/include/c++/4.6/bits/stl_vector.h" project="test_disasm"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.binaryEditor" name="libc.so" tooltip="test_disasm/libc.so">
 <persistable path="/test_disasm/libc.so"/>
 </file>
@@ -580,29 +569,14 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="turing_operation.h" tooltip="test_disasm/turing_operation.h">
 <persistable path="/test_disasm/turing_operation.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.cpp" tooltip="Test_Func/main.cpp">
-<persistable path="/Test_Func/main.cpp"/>
-</file>
 <file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="libdis.h" tooltip="/usr/include/libdis.h">
 <persistable path="/usr/include/libdis.h" project="test_disasm"/>
-</file>
-<file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="libdis.h" tooltip="/usr/local/include/libdis.h">
-<persistable path="/usr/local/include/libdis.h" project="test_disasm"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="append_func.cpp" tooltip="ThreeFunctions/append_func.cpp">
 <persistable path="/ThreeFunctions/append_func.cpp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="trie_tree.h" tooltip="test_disasm/trie_tree.h">
-<persistable path="/test_disasm/trie_tree.h"/>
-</file>
-<file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stl_vector.h" tooltip="/usr/include/c++/4.6/bits/stl_vector.h">
-<persistable path="/usr/include/c++/4.6/bits/stl_vector.h" project="test_disasm"/>
-</file>
 <file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stl_stack.h" tooltip="/usr/include/c++/4.6/bits/stl_stack.h">
 <persistable path="/usr/include/c++/4.6/bits/stl_stack.h" project="test_disasm"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="disasm_util.cpp" tooltip="ThreeFunctions/disasm_util.cpp">
-<persistable path="/ThreeFunctions/disasm_util.cpp"/>
 </file>
 </mruList>
 </workbench>

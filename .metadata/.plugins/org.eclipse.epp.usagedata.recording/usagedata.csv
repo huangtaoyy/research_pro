@@ -1,51 +1,24 @@
 what,kind,bundleId,bundleVersion,description,time
-started,bundle,org.eclipse.mylyn.tasks.ui,3.6.5.v20120215-0100,"org.eclipse.mylyn.tasks.ui",1427699281570
-started,bundle,org.eclipse.mylyn.team.ui,3.6.1.v20110825-0100,"org.eclipse.mylyn.team.ui",1427699281571
-started,bundle,org.eclipse.search,3.7.0.v20110928-1504,"org.eclipse.search",1427699281616
-started,bundle,org.eclipse.team.core,3.6.0.I20110525-0800,"org.eclipse.team.core",1427699281616
-started,bundle,org.eclipse.team.cvs.core,3.3.400.I20110510-0800,"org.eclipse.team.cvs.core",1427699281629
-started,bundle,org.eclipse.team.cvs.ui,3.3.401.v20120126-1227,"org.eclipse.team.cvs.ui",1427699281639
-started,bundle,org.eclipse.team.ui,3.6.101.R37x_v20111109-0800,"org.eclipse.team.ui",1427699281668
-started,bundle,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui",1427699281668
-started,bundle,org.eclipse.ui.console,3.5.100.v20111007_r372,"org.eclipse.ui.console",1427699281669
-started,bundle,org.eclipse.ui.editors,3.7.0.v20110928-1504,"org.eclipse.ui.editors",1427699281669
-started,bundle,org.eclipse.ui.forms,3.5.101.v20111011-1919,"org.eclipse.ui.forms",1427699281696
-started,bundle,org.eclipse.ui.ide,3.7.0.v20110928-1505,"org.eclipse.ui.ide",1427699281703
-started,bundle,org.eclipse.ui.navigator,3.5.101.v20120106-1355,"org.eclipse.ui.navigator",1427699281710
-started,bundle,org.eclipse.ui.navigator.resources,3.4.300.v20110928-1505,"org.eclipse.ui.navigator.resources",1427699281711
-started,bundle,org.eclipse.ui.net,1.2.100.v20111208-1155,"org.eclipse.ui.net",1427699281711
-started,bundle,org.eclipse.ui.views,3.6.0.v20110928-1505,"org.eclipse.ui.views",1427699281712
-started,bundle,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"org.eclipse.ui.workbench",1427699281712
-started,bundle,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.workbench.texteditor",1427699281726
-started,bundle,org.eclipse.update.configurator,3.3.100.v20100512,"org.eclipse.update.configurator",1427699281727
-started,bundle,org.eclipse.update.core,3.2.500.v20110330,"org.eclipse.update.core",1427699281748
-started,bundle,org.eclipse.update.scheduler,3.2.300.v20100512,"org.eclipse.update.scheduler",1427699281748
-os,sysinfo,,,"linux",1427699281750
-arch,sysinfo,,,"x86",1427699281750
-ws,sysinfo,,,"gtk",1427699281750
-locale,sysinfo,,,"zh_CN",1427699281750
-processors,sysinfo,,,"4",1427699281750
-java.runtime.name,sysinfo,,,"Java(TM) SE Runtime Environment",1427699281750
-java.runtime.version,sysinfo,,,"1.7.0_45-b18",1427699281750
-java.specification.name,sysinfo,,,"Java Platform API Specification",1427699281750
-java.specification.vendor,sysinfo,,,"Oracle Corporation",1427699281750
-java.specification.version,sysinfo,,,"1.7",1427699281750
-java.vendor,sysinfo,,,"Oracle Corporation",1427699281750
-java.version,sysinfo,,,"1.7.0_45",1427699281750
-java.vm.info,sysinfo,,,"mixed mode",1427699281750
-java.vm.name,sysinfo,,,"Java HotSpot(TM) Client VM",1427699281750
-java.vm.specification.name,sysinfo,,,"Java Virtual Machine Specification",1427699281750
-java.vm.specification.vendor,sysinfo,,,"Oracle Corporation",1427699281750
-java.vm.specification.version,sysinfo,,,"1.7",1427699281750
-java.vm.vendor,sysinfo,,,"Oracle Corporation",1427699281750
-java.vm.version,sysinfo,,,"24.45-b08",1427699281750
-started,bundle,org.eclipse.cdt.codan.ui,2.0.1.201202111925,"org.eclipse.cdt.codan.ui",1427699282737
-started,bundle,org.eclipse.epp.usagedata.ui,1.3.1.R201106061540,"org.eclipse.epp.usagedata.ui",1427699282781
-opened,view,org.eclipse.ui.ide,3.7.0.v20110928-1505,"org.eclipse.ui.views.ProblemView",1427699285276
-activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1427699289820
-deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1427699306058
-activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1427699612744
-opened,editor,org.eclipse.cdt.ui,5.3.2.201202111925,"org.eclipse.cdt.ui.editor.CEditor",1427699617868
-activated,editor,org.eclipse.cdt.ui,5.3.2.201202111925,"org.eclipse.cdt.ui.editor.CEditor",1427699617914
-started,bundle,org.eclipse.cdt.codan.checkers.ui,1.0.0.201202111925,"org.eclipse.cdt.codan.checkers.ui",1427699648179
-started,bundle,org.eclipse.cdt.mylyn.ui,3.6.0.v20110608-1400,"org.eclipse.cdt.mylyn.ui",1427699652776
+stopped,bundle,org.eclipse.birt.chart.device.swt,3.7.2.v20120213,"org.eclipse.birt.chart.device.swt",1427790430729
+stopped,bundle,org.eclipse.birt.chart.engine.extension,3.7.2.v20120213,"org.eclipse.birt.chart.engine.extension",1427790430729
+stopped,bundle,org.eclipse.linuxtools.gcov.core,4.1.1.201202152032,"org.eclipse.linuxtools.gcov.core",1427790430730
+stopped,bundle,org.eclipse.linuxtools.gprof,4.0.0.201202152032,"org.eclipse.linuxtools.gprof",1427790430730
+stopped,bundle,org.eclipse.linuxtools.dataviewers.charts,4.1.0.201202152032,"org.eclipse.linuxtools.dataviewers.charts",1427790430730
+stopped,bundle,org.eclipse.birt.chart.ui,3.7.2.v20120213,"org.eclipse.birt.chart.ui",1427790430737
+stopped,bundle,org.eclipse.linuxtools.systemtap.ui.dashboardextension,0.3.0.201202152032,"org.eclipse.linuxtools.systemtap.ui.dashboardextension",1427790430737
+stopped,bundle,org.eclipse.linuxtools.systemtap.ui.dashboard,0.3.0.201202152032,"org.eclipse.linuxtools.systemtap.ui.dashboard",1427790430737
+stopped,bundle,org.eclipse.linuxtools.systemtap.ui.graphicalrun,0.3.0.201202152032,"org.eclipse.linuxtools.systemtap.ui.graphicalrun",1427790430737
+stopped,bundle,org.eclipse.linuxtools.systemtap.ui.ide,0.3.0.201202152032,"org.eclipse.linuxtools.systemtap.ui.ide",1427790430738
+stopped,bundle,org.eclipse.linuxtools.systemtap.ui.graphing,0.3.0.201202152032,"org.eclipse.linuxtools.systemtap.ui.graphing",1427790430738
+stopped,bundle,org.eclipse.linuxtools.systemtap.ui.graphingapi.ui,0.3.0.201202152032,"org.eclipse.linuxtools.systemtap.ui.graphingapi.ui",1427790430739
+stopped,bundle,org.eclipse.birt.chart.engine,3.7.2.v20120213,"org.eclipse.birt.chart.engine",1427790430740
+stopped,bundle,org.eclipse.birt.core.ui,3.7.2.v20120213,"org.eclipse.birt.core.ui",1427790430740
+stopped,bundle,org.eclipse.birt.data.aggregation,3.7.2.v20120213,"org.eclipse.birt.data.aggregation",1427790430741
+stopped,bundle,org.eclipse.birt.data,3.7.2.v20120213,"org.eclipse.birt.data",1427790430742
+stopped,bundle,org.eclipse.birt.core,3.7.2.v20120213,"org.eclipse.birt.core",1427790430742
+stopped,bundle,org.eclipse.cdt.build.crossgcc,1.0.2.201202111925,"org.eclipse.cdt.build.crossgcc",1427790430742
+stopped,bundle,org.eclipse.cdt.codan.checkers.ui,1.0.0.201202111925,"org.eclipse.cdt.codan.checkers.ui",1427790430742
+stopped,bundle,org.eclipse.cdt.codan.checkers,1.0.1.201202111925,"org.eclipse.cdt.codan.checkers",1427790430742
+stopped,bundle,org.eclipse.cdt.codan.ui.cxx,2.0.0.201202111925,"org.eclipse.cdt.codan.ui.cxx",1427790430742
+stopped,bundle,org.eclipse.cdt.codan.core.cxx,1.0.0.201202111925,"org.eclipse.cdt.codan.core.cxx",1427790430742
+stopped,bundle,org.eclipse.cdt.launch.remote,2.3.0.201202111925,"org.eclipse.cdt.launch.remote",1427790430751

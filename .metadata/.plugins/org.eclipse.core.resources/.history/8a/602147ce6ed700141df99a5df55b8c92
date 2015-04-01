@@ -1,0 +1,108 @@
+/*
+ * turing_operation.cpp
+ *
+ *  Created on: 2015-3-24
+ *      Author: huangtao
+ */
+#include "turing_operation.h"
+
+//reg=eax by default
+bool Load_Store::load_constant_to_register(vector<LGadget*>& l_gadgets,
+		LGadget* &l_g) {
+
+	string reg = "eax";
+	return load_constant_to_register(l_gadgets, reg, l_g);
+}
+
+bool Load_Store::load_constant_to_register(vector<LGadget*>& l_gadgets,
+		string &reg, LGadget* &l_g) {
+
+	vector<LGadget*>::iterator it = l_gadgets.begin();
+	for (; it != l_gadgets.end(); ++it) {
+		if ((*it)->is_gadget_valid()) {
+
+			vector<Inst*>::iterator vi = (*it)->insts.begin();
+			for (; vi != (*it)->insts.end(); ++vi) {
+				if ((*vi)->inst_valid && (*vi)->node->insn->type == insn_pop) {
+
+					vector<x86_reg_t>::iterator wi =
+							(*vi)->node->write_set.begin();
+					for (; wi != (*vi)->node->write_set.end(); ++wi) {
+						if (strcasecmp(reg.c_str(), (*wi).name) == 0) {
+							//find a l_gadget
+							l_g = (*it);
+							return true;
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	return false;
+}
+
+void Load_Store::val_dbug(x86_op_t* op) {
+	if (op != NULL && op->type == op_expression
+			&& strcasecmp("ecx", op->data.expression.base.name)
+					== 0) {
+//int a = 0;
+//int b = 2;
+	}
+}
+
+//eax <- [ecx + 0x20]
+bool Load_Store::load_from_memory(vector<LGadget*>& l_gadgets, string& src_reg,
+		string& des_reg, LGadget* &l_g) {
+	fstream fout;
+	fout.open("find.gad", ios::out);
+
+	vector<LGadget*>::iterator it = l_gadgets.begin();
+	for (; it != l_gadgets.end(); ++it) {
+		if ((*it)->is_gadget_valid()) {
+
+			vector<Inst*>::iterator vi = (*it)->insts.begin();
+			for (; vi != (*it)->insts.end(); ++vi) {
+				if ((*vi)->inst_valid && (*vi)->node->insn->type == insn_mov) {
+
+					vector<x86_reg_t>::iterator wi =
+							(*vi)->node->write_set.begin();
+					for (; wi != (*vi)->node->write_set.end(); ++wi) {
+						if (strcasecmp(des_reg.c_str(), (*wi).name) == 0) {
+
+							//source register
+							x86_op_t* op = x86_operand_2nd((*vi)->node->insn);
+							if (op != NULL && op->type == op_expression
+									&& strcasecmp(src_reg.c_str(),
+											op->data.expression.base.name)
+											== 0
+									&& strcasecmp("",
+													op->data.expression.index.name)
+													== 0) {
+//								val_dbug(op);
+								//find a l_gadget
+								l_g = (*it);
+								l_g->write_insts(fout);
+//								return true;
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	fout.close();
+
+	return false;
+}
+
+bool Load_Store::store_to_memory(vector<LGadget*>& l_gadgets) {
+
+	return false;
+}

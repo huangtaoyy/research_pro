@@ -60,7 +60,7 @@ public:
 	//vector to store LGadget
 	vector<LGadget*> l_gadgets;
 
-	void output();
+	void output(string&);
 };
 
 
@@ -83,6 +83,7 @@ public:
 
 class LGadget {
 public:
+
 	vector<Inst*> insts;
 
 	//registers altered before ins_i
@@ -99,6 +100,7 @@ public:
 
 	//output instructions
 	void print_insts();
+	void write_insts(fstream& fout);
 };
 
 #endif /* TRIE_TREE_H_ */

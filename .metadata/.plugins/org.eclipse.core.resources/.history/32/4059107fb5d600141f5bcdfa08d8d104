@@ -1,0 +1,359 @@
+/*
+ * test_disasm.cpp
+ *
+ *  Created on: 2013-12-19
+ *      Author: huangtao
+ */
+#include <libdis.h>
+#include <libelf.h>
+#include <gelf.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sysexits.h>
+#include <err.h>
+#include <string.h>
+#include <unistd.h>
+#include <vector>
+#include <stack>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+#include "trie_tree.h"
+#include "inst_dependency.h"
+#include "turing_operation.h"
+
+using namespace std;
+
+
+size_t get_section_ndx(Elf* e, const char* scn_name) {
+	size_t shdr_str_ndx = 0;
+	if (elf_getshdrstrndx(e, &shdr_str_ndx) != 0) {
+		errx(EX_SOFTWARE, "elf_getshstrndx() failed:%s.", elf_errmsg(-1));
+	}
+
+	char* name;
+	size_t shnum;
+	if (elf_getshdrnum(e, &shnum) != 0) {
+		errx(EX_SOFTWARE, "elf_getshnum() failed:%s.", elf_errmsg(-1));
+	}
+
+	Elf_Scn* scn;
+	GElf_Shdr shdr;
+	size_t i;
+	for (i = 0; i < shnum; i++) {
+		scn = elf_getscn(e, i);
+
+		if (gelf_getshdr(scn, &shdr) != &shdr) {
+			errx(EX_SOFTWARE, "getshdr() failed: %s.", elf_errmsg(-1));
+		}
+
+		if ((name = elf_strptr(e, shdr_str_ndx, shdr.sh_name)) == NULL) {
+			errx(EX_SOFTWARE, "elf_strptr() failed: %s.", elf_errmsg(-1));
+		}
+
+		if (strcmp((const char*) name, scn_name) == 0) {
+			size_t elf_ndx = elf_ndxscn(scn);
+			return elf_ndx;
+		}
+	}
+
+	return 0;
+}
+
+unsigned char* get_section_data(Elf* e, const char* scn_name, size_t& size,
+		Elf32_Addr &address) {
+	size_t scn_ndx = get_section_ndx(e, scn_name);
+	Elf_Scn* scn = elf_getscn(e, scn_ndx);
+	Elf_Data* data;
+
+	if ((data = elf_getdata(scn, NULL)) == NULL) {
+		errx(EX_SOFTWARE, "elf_getdata() failed:%s.", elf_errmsg(-1));
+	}
+
+	Elf32_Shdr* shdr = elf32_getshdr(scn);
+	unsigned char* d_buff = (unsigned char*) malloc(
+			sizeof(unsigned char) * shdr->sh_size);
+
+	memcpy(d_buff, data->d_buf, shdr->sh_size);
+	size = shdr->sh_size;
+	address = shdr->sh_addr;
+
+	return d_buff;
+}
+
+size_t write_file(const char* file, unsigned char* content, size_t size) {
+	int fd = open(file, O_CREAT | O_RDWR, S_IRWXU | S_IXOTH | S_IXGRP);
+	size_t act = write(fd, content, size);
+	printf("write _ file over!\n");
+	close(fd);
+	return act;
+}
+
+
+string get_operand_type_str(enum x86_op_type type) {
+	static string types[] = { "op_unused", "op_register", "op_immediate",
+			"op_relative_near", "op_relative_far", "op_absolute",
+			"op_expression", "op_offset", "op_unknown" };
+	int element_size = sizeof(types) / sizeof(types[0]);
+
+	if (type >= element_size) {
+		return types[element_size - 1];
+	} else {
+		return types[type];
+	}
+
+}
+
+void replace_insn_blank(char* line) {
+	char ch;
+	while ((ch = *line) != '\0') {
+		if (ch == '\t') {
+			*line = ' ';
+			return;
+		}
+		line++;
+	}
+}
+
+bool decode_as_insn(unsigned char* &seg, size_t step, size_t pos,
+		Elf32_Addr &address, x86_insn_t* &insn, char* line) {
+	if (pos - step < 0) {
+		return false;
+	}
+
+	x86_init(opt_none, NULL, NULL);
+
+	size_t size = 0;
+	size = x86_disasm(seg, pos, address, pos - step, insn);
+	if (size == step) {
+		x86_format_insn(insn, line, MAX_INSN_STRING, intel_syntax);
+		replace_insn_blank(line);
+
+		if (x86_insn_is_valid(insn)) {
+			x86_cleanup();
+			return true;
+		}
+//		printf("insn: %s\n", line);
+	}
+
+	x86_cleanup();
+
+	return false;
+}
+
+bool insn_boring(x86_insn_t* &insn) {
+	if (insn->type > insn_return && insn->type < insn_fmov) {
+		return false;
+	}
+	return true;
+}
+
+void print_operand_type(TrieNode* node, x86_op_t* op) {
+	node->insn_str += "\t:\tdest_type,";
+	node->insn_str += get_operand_type_str(op->type);
+}
+
+void set_operand_reg(TrieNode* node) {
+	x86_op_t* op_dest = x86_get_dest_operand(node->insn);
+	if (op_dest != NULL) {
+//		print_operand_type(node, op_dest);
+		//operand type is register
+		if (op_dest->type == op_register) {
+			if (op_dest->access & op_write) {
+				node->write_set.push_back(op_dest->data.reg);
+			}
+			if (op_dest->access & op_read) {
+				node->read_set.push_back(op_dest->data.reg);
+			}
+		}
+		//operand type is expression
+		if (op_dest->type == op_expression) {
+			if (op_dest->access & op_write) {
+				node->write_set.push_back(op_dest->data.expression.base);
+				node->write_set.push_back(op_dest->data.expression.index);
+			}
+			if (op_dest->access & op_read) {
+				node->read_set.push_back(op_dest->data.expression.base);
+				node->read_set.push_back(op_dest->data.expression.index);
+			}
+		}
+	}
+
+	x86_op_t* op_src = x86_get_src_operand(node->insn);
+	if (op_src != NULL) {
+//		print_operand_type(node, op_src);
+		//operand type is register
+		if (op_src->type == op_register) {
+			if (op_src->access & op_read) {
+				node->read_set.push_back(op_src->data.reg);
+			}
+		}
+		//operand type is expression
+		if (op_src->type == op_expression) {
+			if (op_src->access & op_read) {
+				node->read_set.push_back(op_src->data.expression.base);
+				node->read_set.push_back(op_src->data.expression.index);
+			}
+		}
+	}
+
+}
+
+void print_operands(TrieNode* node) {
+	node->insn_str += "\t:mnemonic,";
+	node->insn_str += node->insn->mnemonic;
+
+	node->insn_str += "\t:\twrite_set,";
+	vector<x86_reg_t>::iterator it = node->write_set.begin();
+	for (; it != node->write_set.end(); it++) {
+		node->insn_str += (*it).name;
+		node->insn_str += ",";
+	}
+	node->insn_str += "\t:\tread_set,";
+	it = node->read_set.begin();
+	for (; it != node->read_set.end(); it++) {
+		node->insn_str += (*it).name;
+		node->insn_str += ",";
+	}
+}
+
+void int_to_char(unsigned int addr, char* addr_arr, int size) {
+	for (int i = 0; i < size; i++) {
+		addr_arr[i] = addr >> (i * 8);
+	}
+}
+
+void build_from(unsigned char* &seg, size_t pos, TrieNode* &parent,
+		Elf32_Addr &address, int &depth) {
+	if (pos <= 0) {
+		return;
+	}
+
+//	if (depth++ > 7) {
+//		return;
+//	}
+
+	for (int step = 1; step <= MAX_INSN_SIZE; step++) {
+		x86_insn_t* insn = new x86_insn_t;
+		char line[MAX_INSN_STRING];
+
+		if (decode_as_insn(seg, step, pos, address, insn, line)) {
+
+			if (!insn_boring(insn)) {
+				// a new node consisted of insn
+				TrieNode* node = new TrieNode;
+				node->insn = insn;
+//				char temp[32];
+//				int_to_char(insn->offset, temp, 32);
+//				node->insn_str = temp;
+				node->insn_str = line;
+				set_operand_reg(node);
+				print_operands(node);
+
+				node->gadget = parent->gadget;
+				node->gadget.push(node);
+
+				// ensure insn be a child of parent
+				parent->record.push_back(node);
+
+				build_from(seg, pos - step, node, address, depth);
+			}
+		}
+	}
+}
+
+void galileo_text_seg(Trie* &tree, unsigned char* seg, size_t seg_len,
+		Elf32_Addr &address) {
+	size_t pos = 0;
+	for (pos = 0; pos < seg_len; pos++) {
+//		char temp = seg[pos];
+//		printf("%02hhx,", temp);
+//		unsigned char buf[3];
+//		snprintf((char*)buf, sizeof(buf), "%02hhx", seg[pos]);
+//		buf[sizeof(buf) - 1] = '\0';
+//		if (strcmp((const char*)buf, "c3") == 0) {
+//			build_from(seg, pos, tree->root, address);
+//			printf("true,");
+//		}
+		char temp = seg[pos];
+		int depth = 0;
+		if (temp == '\xc3') {
+			//cout how many ret's
+			tree->count_c3++;
+//			printf("true,\n");
+			build_from(seg, pos, tree->root, address, depth);
+		}
+	}
+	cout << endl;
+}
+
+void write_gadgets_to(fstream& fout, LGadget* l_g) {
+	vector<Inst*>::iterator l_it = l_g->insts.begin();
+	for (; l_it != l_g->insts.end(); ++l_it) {
+		fout << (*l_it)->node->insn_str << ((*l_it)->inst_valid ? ":\tvalid" : ":\tnon") << endl;
+	}
+	fout << endl;
+}
+
+void validate_gadgets(vector<LGadget*> &l_gadgets) {
+	fstream fout;
+	fout.open("valid_output.gad", ios::out);
+	if (!fout.is_open()) {
+		cout << "file open error!" << endl;
+		return ;
+	}
+
+	vector<LGadget*>::iterator it = l_gadgets.begin();
+	for (; it != l_gadgets.end(); ++it) {
+		if ((*it)->is_gadget_valid()) {
+			write_gadgets_to(fout, *it);
+		}
+	}
+	fout.close();
+}
+
+
+int main(int argc, char** argv) {
+	if (argc != 2) {
+		printf("usage: %s file\n", argv[0]);
+	}
+
+	Elf* e;
+	int fd;
+
+	elf_version(EV_CURRENT);
+	fd = open(argv[1], O_RDWR);
+//	fd = open("libc.so", O_RDWR);
+	e = elf_begin(fd, ELF_C_RDWR, NULL);
+
+	unsigned char* d_buff = NULL;
+	size_t size = 0;
+	Elf32_Addr address = 0;
+	d_buff = get_section_data(e, ".text", size, address);
+
+	elf_end(e);
+	close(fd);
+
+//	write_file("output", d_buff, size);
+	Trie* tree = new Trie;
+	galileo_text_seg(tree, d_buff, size, address);
+
+	string filename = "output.gad";
+	tree->output(filename);
+	cout << tree->l_gadgets.size() << " gadgets get !" << endl;
+
+	validate_gadgets(tree->l_gadgets);
+
+	//turing complete lgadget
+	Load_Store load_store;
+	LGadget* l_g = new LGadget;
+	string reg = "eax";
+
+	//load constant to register
+	load_store.load_constant_to_register(tree->l_gadgets, reg, l_g);
+	l_g->print_insts();
+
+	return 0;
+}

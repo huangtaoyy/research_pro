@@ -2,10 +2,10 @@
 **** Build of configuration Debug for project test_disasm ****
 
 make all 
-Building file: ../process.cpp
+Building file: ../turing_operation.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"process.d" -MT"process.d" -o "process.o" "../process.cpp"
-Finished building: ../process.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"turing_operation.d" -MT"turing_operation.d" -o "turing_operation.o" "../turing_operation.cpp"
+Finished building: ../turing_operation.cpp
  
 Building target: test_disasm
 Invoking: Cross G++ Linker

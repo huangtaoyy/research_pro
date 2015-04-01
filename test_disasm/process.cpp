@@ -127,7 +127,7 @@ bool decode_as_insn(unsigned char* &seg, size_t step, size_t pos,
 	size = x86_disasm(seg, pos, address, pos - step, insn);
 	if (size == step) {
 		x86_format_insn(insn, line, MAX_INSN_STRING, native_syntax);
-		replace_insn_blank(line);
+//		replace_insn_blank(line);
 
 		if (x86_insn_is_valid(insn)) {
 			x86_cleanup();
@@ -160,21 +160,25 @@ void set_operand_reg(TrieNode* node) {
 		//operand type is register
 		if (op_dest->type == op_register) {
 			if (op_dest->access & op_write) {
-				node->write_set.push_back(op_dest->data.reg);
+				node->write_set.push_back(op_dest->data.reg.name);
 			}
 			if (op_dest->access & op_read) {
-				node->read_set.push_back(op_dest->data.reg);
+				node->read_set.push_back(op_dest->data.reg.name);
 			}
 		}
 		//operand type is expression
 		if (op_dest->type == op_expression) {
+			string base_name = pre_brackets + op_dest->data.expression.base.name
+					+ post_brackets;
+			string index_name = pre_brackets
+					+ op_dest->data.expression.index.name + post_brackets;
 			if (op_dest->access & op_write) {
-				node->write_set.push_back(op_dest->data.expression.base);
-				node->write_set.push_back(op_dest->data.expression.index);
+				node->write_set.push_back(base_name);
+				node->write_set.push_back(index_name);
 			}
 			if (op_dest->access & op_read) {
-				node->read_set.push_back(op_dest->data.expression.base);
-				node->read_set.push_back(op_dest->data.expression.index);
+				node->read_set.push_back(base_name);
+				node->read_set.push_back(index_name);
 			}
 		}
 	}
@@ -185,14 +189,18 @@ void set_operand_reg(TrieNode* node) {
 		//operand type is register
 		if (op_src->type == op_register) {
 			if (op_src->access & op_read) {
-				node->read_set.push_back(op_src->data.reg);
+				node->read_set.push_back(op_src->data.reg.name);
 			}
 		}
 		//operand type is expression
 		if (op_src->type == op_expression) {
 			if (op_src->access & op_read) {
-				node->read_set.push_back(op_src->data.expression.base);
-				node->read_set.push_back(op_src->data.expression.index);
+				string base_name = pre_brackets
+						+ op_src->data.expression.base.name + post_brackets;
+				string index_name = pre_brackets
+						+ op_src->data.expression.index.name + post_brackets;
+				node->read_set.push_back(base_name);
+				node->read_set.push_back(index_name);
 			}
 		}
 	}
@@ -200,19 +208,22 @@ void set_operand_reg(TrieNode* node) {
 }
 
 void print_operands(TrieNode* node) {
+//	node->insn_str += "\t:prefix_string,";
+//	node->insn_str += node->insn->prefix_string;
+
 	node->insn_str += "\t:mnemonic,";
 	node->insn_str += node->insn->mnemonic;
 
 	node->insn_str += "\t:\twrite_set,";
-	vector<x86_reg_t>::iterator it = node->write_set.begin();
+	vector<string>::iterator it = node->write_set.begin();
 	for (; it != node->write_set.end(); it++) {
-		node->insn_str += (*it).name;
+		node->insn_str += (*it);
 		node->insn_str += ",";
 	}
 	node->insn_str += "\t:\tread_set,";
 	it = node->read_set.begin();
 	for (; it != node->read_set.end(); it++) {
-		node->insn_str += (*it).name;
+		node->insn_str += (*it);
 		node->insn_str += ",";
 	}
 }
@@ -225,15 +236,11 @@ void int_to_char(unsigned int addr, char* addr_arr, int size) {
 
 void build_from(unsigned char* &seg, size_t pos, TrieNode* &parent,
 		Elf32_Addr &address, int &depth) {
-	if (pos <= 0) {
+	if (pos < 0) {
 		return;
 	}
 
-//	if (depth++ > 7) {
-//		return;
-//	}
-
-	for (int step = 1; step <= MAX_INSN_SIZE; step++) {
+	for (size_t step = 1; step <= MAX_INSN_SIZE && step <= pos; step++) {
 		x86_insn_t* insn = new x86_insn_t;
 		char line[MAX_INSN_STRING];
 

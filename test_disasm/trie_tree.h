@@ -17,6 +17,9 @@
 
 using namespace std;
 
+const string pre_brackets = "[";
+const string post_brackets = "]";
+
 struct TrieNode {
 	x86_insn_t* insn;
 	string insn_str;
@@ -26,8 +29,8 @@ struct TrieNode {
 
 	stack<TrieNode*> gadget;
 
-	vector<x86_reg_t> read_set;
-	vector<x86_reg_t> write_set;
+	vector<string> read_set;
+	vector<string> write_set;
 
 	static string RET_STR;
 
@@ -87,10 +90,10 @@ public:
 	vector<Inst*> insts;
 
 	//registers altered before ins_i
-	void pre_write(vector<x86_reg_t> & v, size_t i);
+	void pre_write(vector<string> & v, size_t i);
 
 	//registers altered after ins_i
-	void post_write(vector<x86_reg_t>& v,size_t i);
+	void post_write(vector<string>& v,size_t i);
 
 	//no conflict
 	bool is_inst_valid(size_t i);

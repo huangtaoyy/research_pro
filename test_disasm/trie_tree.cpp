@@ -147,14 +147,20 @@ void set_reg_name(vector<x86_reg_t> &v, vector<string> &v_s) {
 }
 
 bool has_same_reg1(vector<string>& v_s, string str) {
-	static string regs[4][4] = { { "eax", "ax", "ah", "al" }, { "ebx", "bx",
+	static const int col = 4;
+	static const int row = 12;
+	static string regs[row][col] = { { "eax", "ax", "ah", "al" }, { "ebx", "bx",
 			"bh", "bl" }, { "ecx", "cx", "ch", "cl" },
-			{ "edx", "dx", "dh", "dl" }, };
+			{ "edx", "dx", "dh", "dl" }, { "edi", "di", "di", "di" }, { "esi",
+					"si", "si", "si" }, { "[eax]", "[ax]", "[ah]", "[al]" }, { "[ebx]",
+					"[bx]", "[bh]", "[bl]" }, { "[ecx]", "[cx]", "[ch]", "[cl]" }, { "[edx]",
+					"[dx]", "[dh]", "[dl]" }, { "[edi]", "[di]", "[di]", "[di]" }, { "[esi]",
+					"[si]", "[si]", "[si]" } };
 
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
+	for (int i = 0; i < row; i++) {
+		for (int j = 0; j < col; j++) {
 			if (strcasecmp(regs[i][j].c_str(), str.c_str()) == 0) {
-				for (int k = 0; k < 4; k++) {
+				for (int k = 0; k < col; k++) {
 					vector<string>::const_iterator r = find(v_s.begin(),
 							v_s.end(), regs[i][k].c_str());
 					if (r != v_s.end()) {
@@ -169,31 +175,35 @@ bool has_same_reg1(vector<string>& v_s, string str) {
 	return false;
 }
 
+//erase those more than once
+void erase_reduplicated(vector<string>& v_s) {
+	sort(v_s.begin(), v_s.end());
+	vector<string>::iterator it = unique(v_s.begin(), v_s.end());
+	v_s.erase(it, v_s.end());
+}
+
 //if two vector has a same object
-bool has_same_reg(vector<x86_reg_t> &v1, vector<x86_reg_t> &v) {
+bool has_same_reg(vector<string> &v1, vector<string> &v) {
 	if (v.empty() || v1.empty()) {
 		return false;
 	}
 
-	vector<string> v1_s, v_s;
-	set_reg_name(v1, v1_s);
-	set_reg_name(v, v_s);
+//	vector<string> v1_s, v_s;
+//	set_reg_name(v1, v1_s);
+	erase_reduplicated(v1);
+//	set_reg_name(v, v_s);
+	erase_reduplicated(v);
 
-	for (vector<string>::iterator i1 = v1_s.begin(); i1 != v1_s.end(); ++i1) {
-		if (has_same_reg1(v_s, *i1)) {
+	for (vector<string>::iterator i1 = v1.begin(); i1 != v1.end(); ++i1) {
+		if (has_same_reg1(v, *i1)) {
 			return true;
 		}
-//		vector<string>::const_iterator r = find(v_s.begin(), v_s.end(), *i1);
-//		if (r != v_s.end()) {
-////			cout << "same!" << endl;
-//			return true;
-//		}
 	}
 	return false;
 }
 
 //registers altered before ins_i
-void LGadget::pre_write(vector<x86_reg_t> & result, size_t i) {
+void LGadget::pre_write(vector<string> & result, size_t i) {
 	if (i > insts.size() || i < 1) {
 		return;
 	}
@@ -202,10 +212,7 @@ void LGadget::pre_write(vector<x86_reg_t> & result, size_t i) {
 	vector<Inst*>::iterator it = insts.begin();
 	for (; it != insts.end() && count < i; ++it) {
 		TrieNode *node = (*it)->node;
-//		for (vector<x86_reg_t>::iterator v_i = node->write_set.begin();
-//				v_i != node->write_set.end(); ++v_i) {
-//			result.push_back(*v_i);
-//		}
+
 		result.insert(result.end(), node->write_set.begin(),
 				node->write_set.end());
 		count++;
@@ -213,17 +220,14 @@ void LGadget::pre_write(vector<x86_reg_t> & result, size_t i) {
 }
 
 //registers altered after ins_i
-void LGadget::post_write(vector<x86_reg_t> & result, size_t i) {
+void LGadget::post_write(vector<string> & result, size_t i) {
 	if (i >= insts.size()) {
 		return;
 	}
 	vector<Inst*>::iterator it = insts.begin() + i + 1;
 	for (; it != insts.end(); ++it) {
 		TrieNode *node = (*it)->node;
-//		for (vector<x86_reg_t>::iterator v_i = node->write_set.begin();
-//				v_i != node->write_set.end(); ++v_i) {
-//			result.push_back(*v_i);
-//		}
+
 		result.insert(result.end(), node->write_set.begin(),
 				node->write_set.end());
 	}
@@ -238,13 +242,13 @@ bool LGadget::is_inst_valid(size_t i) {
 	}
 
 	//readset
-	vector<x86_reg_t> read_set = inst->node->read_set;
+	vector<string> read_set = inst->node->read_set;
 
 	//writeset
-	vector<x86_reg_t> write_set = inst->node->write_set;
+	vector<string> write_set = inst->node->write_set;
 
 	//prewrite
-	vector<x86_reg_t> pre_write_v;
+	vector<string> pre_write_v;
 	pre_write(pre_write_v, i);
 
 	if (has_same_reg(read_set, pre_write_v)) {
@@ -255,7 +259,7 @@ bool LGadget::is_inst_valid(size_t i) {
 	}
 
 	//postwrite
-	vector<x86_reg_t> post_write_v;
+	vector<string> post_write_v;
 	post_write(post_write_v, i);
 
 	if (has_same_reg(write_set, post_write_v)) {

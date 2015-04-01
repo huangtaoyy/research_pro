@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="37" version="2.0">
+<workbench progressCount="40" version="2.0">
 <workbenchAdvisor/>
 <window height="778" maximized="true" width="984" x="456" y="67">
 <fastViewData fastViewLocation="1024"/>
@@ -35,34 +35,29 @@
 <part id="2"/>
 <part id="3"/>
 <part id="4"/>
-<part id="5"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="process.cpp" partName="process.cpp" path="/home/huangtao/workspace/test_disasm/process.cpp" title="process.cpp" tooltip="test_disasm/process.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/process.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="8491" selectionTopPixel="5668"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="9029" selectionTopPixel="5906"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="turing_operation.h" partName="turing_operation.h" path="/home/huangtao/workspace/test_disasm/turing_operation.h" title="turing_operation.h" tooltip="test_disasm/turing_operation.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/turing_operation.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="704" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="681" selectionTopPixel="41"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="turing_operation.cpp" partName="turing_operation.cpp" path="/home/huangtao/workspace/test_disasm/turing_operation.cpp" title="turing_operation.cpp" tooltip="test_disasm/turing_operation.cpp" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="turing_operation.cpp" partName="turing_operation.cpp" path="/home/huangtao/workspace/test_disasm/turing_operation.cpp" title="turing_operation.cpp" tooltip="test_disasm/turing_operation.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/turing_operation.cpp"/>
-<editorState selectionHorizontalPixel="168" selectionLength="0" selectionOffset="4716" selectionTopPixel="2854"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5216" selectionTopPixel="3035"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="trie_tree.cpp" partName="trie_tree.cpp" path="/home/huangtao/workspace/test_disasm/trie_tree.cpp" title="trie_tree.cpp" tooltip="test_disasm/trie_tree.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/trie_tree.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2120" selectionTopPixel="2035"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6306" selectionTopPixel="4071"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="trie_tree.h" partName="trie_tree.h" path="/home/huangtao/workspace/test_disasm/trie_tree.h" title="trie_tree.h" tooltip="test_disasm/trie_tree.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_disasm/trie_tree.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="10" selectionOffset="1063" selectionTopPixel="1130"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="libdis.h" partName="libdis.h" title="libdis.h" tooltip="/usr/local/include/libdis.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" path="/usr/local/include/libdis.h" project="test_disasm"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="10865" selectionTopPixel="3660"/>
+<editorState selectionHorizontalPixel="0" selectionLength="16" selectionOffset="344" selectionTopPixel="238"/>
 </editor>
 </editors>
 <views>
@@ -218,7 +213,7 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.16788857" ratioLeft="229" ratioRight="1135" relationship="2" relative="topLeft"/>
-<info folder="true" part="bottom" ratio="0.78322583" ratioLeft="607" ratioRight="168" relationship="4" relative="org.eclipse.ui.editorss">
+<info folder="true" part="bottom" ratio="0.69548386" ratioLeft="539" ratioRight="236" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
@@ -359,161 +354,162 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/process.cpp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/turing_operation.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/turing_operation.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/process.cpp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/trie_tree.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/trie_tree.h"/>
 <editor factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usr/local/include/libdis.h" project="test_disasm"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_disasm/turing_operation.h"/>
 </editors>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="1013" y="47"/>
+<item historyLabel="process.cpp" index="1">
+<position info="not_deleted" x="3825" y="8"/>
 </item>
-<item historyLabel="turing_operation.h" index="2">
-<position info="not_deleted" x="704" y="0"/>
+<item historyLabel="trie_tree.h" index="3">
+<position info="not_deleted" x="478" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="3112" y="112"/>
+<item historyLabel="process.cpp" index="1">
+<position info="not_deleted" x="4216" y="0"/>
 </item>
-<item historyLabel="turing_operation.h" index="2">
-<position info="not_deleted" x="704" y="0"/>
+<item historyLabel="trie_tree.h" index="3">
+<position info="not_deleted" x="478" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="3241" y="0"/>
+<item historyLabel="trie_tree.h" index="3">
+<position info="not_deleted" x="270" y="12"/>
 </item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="8470" y="0"/>
+<item historyLabel="process.cpp" index="1">
+<position info="not_deleted" x="3831" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="3241" y="0"/>
+<item historyLabel="trie_tree.h" index="3">
+<position info="not_deleted" x="505" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="3838" y="0"/>
+<item historyLabel="process.cpp" index="1">
+<position info="not_deleted" x="5608" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4815" y="0"/>
+<item historyLabel="trie_tree.cpp" index="2">
+<position info="not_deleted" x="5895" y="8"/>
 </item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="8470" y="0"/>
+<item historyLabel="trie_tree.cpp" index="2">
+<position info="not_deleted" x="6054" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="3129" y="15"/>
+<item historyLabel="trie_tree.cpp" index="2">
+<position info="not_deleted" x="4589" y="12"/>
 </item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="8491" y="0"/>
+<item historyLabel="trie_tree.cpp" index="2">
+<position info="not_deleted" x="4915" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="3643" y="0"/>
+<item historyLabel="trie_tree.cpp" index="2">
+<position info="not_deleted" x="3420" y="13"/>
 </item>
-<item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="12538" y="0"/>
+<item historyLabel="trie_tree.cpp" index="2">
+<position info="not_deleted" x="6018" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4219" y="0"/>
+<item historyLabel="trie_tree.cpp" index="2">
+<position info="not_deleted" x="5020" y="0"/>
 </item>
-<item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="7517" y="11"/>
+<item historyLabel="trie_tree.h" index="3">
+<position info="not_deleted" x="1448" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4215" y="0"/>
+<item historyLabel="trie_tree.cpp" index="2">
+<position info="not_deleted" x="6306" y="0"/>
 </item>
-<item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="7603" y="0"/>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="4130" y="0"/>
 </item>
-<item historyLabel="process.cpp" index="0">
-<position info="not_deleted" x="8491" y="0"/>
+<item historyLabel="process.cpp" index="1">
+<position info="not_deleted" x="9029" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4215" y="0"/>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="4834" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4892" y="0"/>
-</item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4264" y="0"/>
+<item historyLabel="trie_tree.h" index="3">
+<position info="not_deleted" x="352" y="0"/>
 </item>
 <item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="5445" y="6"/>
+<position info="not_deleted" x="20334" y="0"/>
 </item>
-<item historyLabel="turing_operation.h" index="2">
-<position info="not_deleted" x="704" y="0"/>
-</item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4263" y="0"/>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="4927" y="0"/>
 </item>
 <item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="12640" y="10"/>
+<position info="not_deleted" x="21193" y="0"/>
+</item>
+<item historyLabel="process.cpp" index="1">
+<position info="not_deleted" x="9029" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="4927" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="2952" y="21"/>
+</item>
+<item historyLabel="turing_operation.h" index="5">
+<position info="not_deleted" x="741" y="0"/>
+</item>
+<item historyLabel="turing_operation.h" index="5">
+<position info="not_deleted" x="685" y="16"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="2970" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="4919" y="0"/>
+</item>
+<item historyLabel="trie_tree.h" index="3">
+<position info="not_deleted" x="344" y="16"/>
+</item>
+<item historyLabel="turing_operation.h" index="5">
+<position info="not_deleted" x="669" y="34"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="4919" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="4904" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="2970" y="0"/>
+</item>
+<item historyLabel="turing_operation.h" index="5">
+<position info="not_deleted" x="681" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="2970" y="0"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="3115" y="10"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="3226" y="27"/>
+</item>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="5216" y="0"/>
 </item>
 <item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="12626" y="0"/>
+<position info="not_deleted" x="20554" y="0"/>
 </item>
-<item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="6868" y="0"/>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="5216" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="2822" y="0"/>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="5192" y="0"/>
 </item>
-<item historyLabel="trie_tree.cpp" index="3">
-<position info="not_deleted" x="6933" y="0"/>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="3115" y="10"/>
 </item>
-<item historyLabel="trie_tree.cpp" index="3">
-<position info="not_deleted" x="2936" y="20"/>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="3199" y="0"/>
 </item>
-<item historyLabel="trie_tree.cpp" index="3">
-<position info="not_deleted" x="1788" y="20"/>
+<item historyLabel="turing_operation.cpp" index="0">
+<position/>
 </item>
-<item historyLabel="trie_tree.cpp" index="3">
-<position info="not_deleted" x="2120" y="0"/>
+<item historyLabel="turing_operation.cpp" index="0">
+<position/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="2822" y="0"/>
+<item historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="3199" y="0"/>
 </item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="2497" y="0"/>
-</item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4095" y="0"/>
-</item>
-<item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="28118" y="15"/>
-</item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4095" y="0"/>
-</item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="5118" y="0"/>
-</item>
-<item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="27898" y="17"/>
-</item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4719" y="0"/>
-</item>
-<item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="27898" y="17"/>
-</item>
-<item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="27952" y="0"/>
-</item>
-<item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="26856" y="6"/>
-</item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4669" y="0"/>
-</item>
-<item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="26856" y="6"/>
-</item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4687" y="0"/>
-</item>
-<item historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="27898" y="17"/>
-</item>
-<item historyLabel="turing_operation.cpp" index="1">
-<position info="not_deleted" x="4716" y="0"/>
-</item>
-<item active="true" historyLabel="libdis.h" index="4">
-<position info="not_deleted" x="26856" y="6"/>
+<item active="true" historyLabel="turing_operation.cpp" index="0">
+<position info="not_deleted" x="3197" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>

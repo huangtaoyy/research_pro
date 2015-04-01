@@ -25,10 +25,10 @@ bool Load_Store::load_constant_to_register(vector<LGadget*>& l_gadgets,
 			for (; vi != (*it)->insts.end(); ++vi) {
 				if ((*vi)->inst_valid && (*vi)->node->insn->type == insn_pop) {
 
-					vector<x86_reg_t>::iterator wi =
+					vector<string>::iterator wi =
 							(*vi)->node->write_set.begin();
 					for (; wi != (*vi)->node->write_set.end(); ++wi) {
-						if (strcasecmp(reg.c_str(), (*wi).name) == 0) {
+						if (strcasecmp(reg.c_str(), (*wi).c_str()) == 0) {
 							//find a l_gadget
 							l_g = (*it);
 							return true;
@@ -76,10 +76,10 @@ bool Load_Store::load_from_memory(vector<LGadget*>& l_gadgets, string& src_reg,
 						&& strcasecmp((*vi)->node->insn->mnemonic, "lds")
 								!= 0) {
 
-					vector<x86_reg_t>::iterator wi =
+					vector<string>::iterator wi =
 							(*vi)->node->write_set.begin();
 					for (; wi != (*vi)->node->write_set.end(); ++wi) {
-						if (strcasecmp(des_reg.c_str(), (*wi).name) == 0) {
+						if (strcasecmp(des_reg.c_str(), (*wi).c_str()) == 0) {
 
 							//source register
 							x86_op_t* op = x86_operand_2nd((*vi)->node->insn);
@@ -123,10 +123,16 @@ bool Load_Store::load_from_memory(vector<LGadget*>& l_gadgets, string& src_reg,
 	return false;
 }
 
-void Load_Store::val_dbug(x86_op_t* op) {
+void Load_Store::val_debug(x86_op_t* op) {
 	if (op != NULL && strcasecmp("ecx", op->data.expression.base.name) == 0) {
 //int a = 0;
 //int b = 2;
+	}
+}
+
+void Load_Store::inst_debug(x86_insn_t* insn) {
+	if (insn != NULL) {
+//		printf("%s\n", insn->bytes);
 	}
 }
 
@@ -155,10 +161,9 @@ bool Load_Store::store_to_memory(vector<LGadget*>& l_gadgets, string& src_reg,
 					if ((*vi)->node->read_set.size() != 1) {
 						continue;
 					}
-					vector<x86_reg_t>::iterator ri =
-							(*vi)->node->read_set.begin();
+					vector<string>::iterator ri = (*vi)->node->read_set.begin();
 					for (; ri != (*vi)->node->read_set.end(); ++ri) {
-						if (strcasecmp(src_reg.c_str(), (*ri).name) == 0) {
+						if (strcasecmp(src_reg.c_str(), (*ri).c_str()) == 0) {
 
 							//dest register
 							x86_op_t* op = x86_operand_1st((*vi)->node->insn);
@@ -176,13 +181,21 @@ bool Load_Store::store_to_memory(vector<LGadget*>& l_gadgets, string& src_reg,
 								cout << op->data.expression.index.name << " : "
 										<< op->data.expression.index.type
 										<< endl;
-								cout << "operand count : " << x86_operand_count(((*vi)->node->insn), op_any) << endl;
+								cout << "operand count : "
+										<< x86_operand_count(
+												((*vi)->node->insn), op_any)
+										<< endl;
+								cout << "size : "
+										<< (*vi)->node->insn->size
+										<< endl << endl;
+
 								//find a l_gadget, 找可用指令最少的那个gadget
 								int count = count_valid_inst((*it));
 								(*it)->write_insts(fout);
 								cout << "optype: " << op->type << endl;
 								if (++a >= 2) {
-									val_dbug(op);
+									val_debug(op);
+//									inst_debug((*vi)->node->insn);
 								}
 								if (count < least_valid) {
 									l_g = (*it);

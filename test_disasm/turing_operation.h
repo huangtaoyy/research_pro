@@ -22,7 +22,8 @@ public:
 	bool load_from_memory(vector<LGadget*>& l_gadgets, string& src_reg, string& des_reg, LGadget* &l_g);
 	bool store_to_memory(vector<LGadget*>& l_gadgets, string& src_reg, string& des_reg, LGadget* &l_g);
 
-	void val_dbug(x86_op_t* op);
+	void val_debug(x86_op_t* op);
+	void inst_debug(x86_insn_t* insn);
 	int count_valid_inst(LGadget* &l_g);
 };
 
